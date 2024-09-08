@@ -1,0 +1,144 @@
+tbl_url <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/269/key/WebAPI_KEY"
+url_web_tabel <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/269/key/WebAPI_KEY"
+url_tabel <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/269/key/WebAPI_KEY"
+link_tabel <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/269/key/WebAPI_KEY"
+link_tabel
+library(tidyverse)
+library(jsonlite)
+library(httr)
+link_tabel |> str_sub(1, -10)
+link_tabel |> str_sub(1, -11)
+url <- paste0(
+link_tabel |> str_sub(1, -11),
+api_key
+)
+# Ambil dari Key akun masing-masing
+# kunjungi we
+api_key <- "3735d1f9790242bf0462a028e8016507"
+url <- paste0(
+link_tabel |> str_sub(1, -11),
+api_key
+)
+test <- GET(url)
+url
+data <- test$content |>
+rawToChar() |>
+fromJSON(flatten = TRUE)
+data
+test
+test$status_code
+test$content
+rawToChar(test$content)
+rawToChar(test$content) |> jsonlite::fromJSON()
+rawToChar(test$content) |> jsonlite::fromJSON(flatten = TRUE)
+data
+names(data)
+data$var
+data$status
+data
+View(data)
+data$datacontent
+data$datacontent |>purrr::flatten()
+data$datacontent |>purrr::flatten_chr()
+data$datacontent
+data |> map(\(datacontent) map_chr())
+data |> map(\(datacontent) map_chr(datacontent))
+data |> map(\(datacontent) map_chr(datacontent, names))
+data$var
+data$turvar
+data$vervar
+data$tahun
+data$turtahun
+data
+data |> flatten()
+data$datacontent |> flatten()
+data$datacontent |> purrr::flatten()
+data$datacontent |> purrr::flatten() |> unname()
+data$datacontent
+tbl_a <- tibble( a = data$datacontent)
+tbl_a
+tbl_a <- tibble( a = data$datacontent |> map_dbl())
+tbl_a <- tibble( a = data$datacontent |> unnest())
+tbl_a <- tibble( a = data$datacontent |> unlist())
+tbl_a
+tbl_a <- tibble( a = data$datacontent |> names())
+tbl_a
+tbl_a <- tibble(
+a = data$datacontent |> names(),
+a = data$datacontent |> unlist()
+)
+tbl_a
+tbl_a <- tibble(
+a = data$datacontent
+)
+tbl_a
+tbl_a |>
+mutate(
+wo = map(a, names)
+)
+tbl_a |>
+mutate(
+wo = names(a)
+)
+tbl_a |>
+mutate(
+wo = names(a),
+ah = extract(a)
+)
+tbl_a |>
+mutate(
+wo = names(a),
+ah = unlink(a)
+)
+tbl_a |>
+mutate(
+wo = names(a),
+ah = unnest(a)
+)
+tbl_a |>
+mutate(
+wo = names(a),
+ah = map_dbl(a)
+)
+tbl_a |>
+mutate(
+wo = names(a),
+ah = map_dbl(a, "")
+)
+tbl_a |>
+mutate(
+wo = names(a),
+ah = map_dbl(a, extract)
+)
+tbl_a <- tibble(
+a = data$datacontent,
+wo = names(a)
+)
+tbl_a
+View(tbl_a)
+tbl_a <- tibble(
+a = data$datacontent |> names(),
+a = data$datacontent |> unlist()
+)
+tbl_a <- tibble(
+a = data$datacontent |> names()
+)
+View(tbl_a)
+View(data)
+install.packages("tidyjson")
+library(tidyjson)
+worldbank
+worldbank |> spread_all()
+test
+data
+test
+test$content
+test$content |> fromJSON()
+test$content |> jsonlite::fromJSON()
+test$content |>
+rawToChar()
+test$content |>
+rawToChar() |>
+fromJSON(flatten = TRUE)
+test$content |> rawToChar()
+test$content |> rawToChar() |> spread_all()

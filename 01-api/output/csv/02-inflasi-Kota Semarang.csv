@@ -1,0 +1,401 @@
+inflasi,kelompok,tahun,bulan
+5.01,"Makanan, Minuman dan Tembakau",2024,Januari
+6.51,"Makanan, Minuman dan Tembakau",2024,Februari
+8.47,"Makanan, Minuman dan Tembakau",2024,Maret
+8.05,"Makanan, Minuman dan Tembakau",2024,April
+6.12,"Makanan, Minuman dan Tembakau",2024,Mei
+4.72,"Makanan, Minuman dan Tembakau",2024,Juni
+3.58,"Makanan, Minuman dan Tembakau",2024,Juli
+3.11,"Makanan, Minuman dan Tembakau",2024,Agustus
+4.82,Makanan,2024,Januari
+6.88,Makanan,2024,Februari
+9.23,Makanan,2024,Maret
+8.89,Makanan,2024,April
+6.68,Makanan,2024,Mei
+4.86,Makanan,2024,Juni
+3.4,Makanan,2024,Juli
+2.72,Makanan,2024,Agustus
+3.8,Minuman yang Tidak Beralkohol,2024,Januari
+2.95,Minuman yang Tidak Beralkohol,2024,Februari
+2.75,Minuman yang Tidak Beralkohol,2024,Maret
+2.81,Minuman yang Tidak Beralkohol,2024,April
+2.6,Minuman yang Tidak Beralkohol,2024,Mei
+3.23,Minuman yang Tidak Beralkohol,2024,Juni
+3.47,Minuman yang Tidak Beralkohol,2024,Juli
+4.67,Minuman yang Tidak Beralkohol,2024,Agustus
+7.58,Rokok dan Tembakau,2024,Januari
+6.54,Rokok dan Tembakau,2024,Februari
+7,Rokok dan Tembakau,2024,Maret
+5.51,Rokok dan Tembakau,2024,April
+4.51,Rokok dan Tembakau,2024,Mei
+4.85,Rokok dan Tembakau,2024,Juni
+5.09,Rokok dan Tembakau,2024,Juli
+5.03,Rokok dan Tembakau,2024,Agustus
+1.53,Pakaian dan Alas Kaki,2024,Januari
+1.51,Pakaian dan Alas Kaki,2024,Februari
+1.41,Pakaian dan Alas Kaki,2024,Maret
+1.16,Pakaian dan Alas Kaki,2024,April
+1.16,Pakaian dan Alas Kaki,2024,Mei
+0.87,Pakaian dan Alas Kaki,2024,Juni
+0.75,Pakaian dan Alas Kaki,2024,Juli
+0.85,Pakaian dan Alas Kaki,2024,Agustus
+1.67,Pakaian,2024,Januari
+1.66,Pakaian,2024,Februari
+1.53,Pakaian,2024,Maret
+1.24,Pakaian,2024,April
+1.23,Pakaian,2024,Mei
+1.1,Pakaian,2024,Juni
+0.96,Pakaian,2024,Juli
+1.07,Pakaian,2024,Agustus
+0.93,Alas Kaki,2024,Januari
+0.93,Alas Kaki,2024,Februari
+0.94,Alas Kaki,2024,Maret
+0.89,Alas Kaki,2024,April
+0.89,Alas Kaki,2024,Mei
+-0.04,Alas Kaki,2024,Juni
+-0.04,Alas Kaki,2024,Juli
+-0.04,Alas Kaki,2024,Agustus
+-0.05,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Januari
+-0.06,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Februari
+-0.18,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Maret
+-0.12,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,April
+-0.25,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Mei
+-0.32,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Juni
+-0.22,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Juli
+-0.19,"Perumahan, Air, Listrik dan Bahan Bakar Rumah",2024,Agustus
+0.14,Sewa dan Kontrak Rumah,2024,Januari
+0.14,Sewa dan Kontrak Rumah,2024,Februari
+0.14,Sewa dan Kontrak Rumah,2024,Maret
+0.09,Sewa dan Kontrak Rumah,2024,April
+0.09,Sewa dan Kontrak Rumah,2024,Mei
+0.07,Sewa dan Kontrak Rumah,2024,Juni
+0.07,Sewa dan Kontrak Rumah,2024,Juli
+0,Sewa dan Kontrak Rumah,2024,Agustus
+-0.24,"Pemeliharaan, Perbaikan dan Keamanan",2024,Januari
+-0.29,"Pemeliharaan, Perbaikan dan Keamanan",2024,Februari
+-1.08,"Pemeliharaan, Perbaikan dan Keamanan",2024,Maret
+-1.26,"Pemeliharaan, Perbaikan dan Keamanan",2024,April
+-1.33,"Pemeliharaan, Perbaikan dan Keamanan",2024,Mei
+-1.25,"Pemeliharaan, Perbaikan dan Keamanan",2024,Juni
+-0.8,"Pemeliharaan, Perbaikan dan Keamanan",2024,Juli
+-0.56,"Pemeliharaan, Perbaikan dan Keamanan",2024,Agustus
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Januari
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Februari
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Maret
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,April
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Mei
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Juni
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Juli
+0,Penyediaan Air dan Layanan Perumahan Lainnya,2024,Agustus
+-0.06,Listrik dan Bahan Bakar Rumah Tangga,2024,Januari
+-0.06,Listrik dan Bahan Bakar Rumah Tangga,2024,Februari
+0,Listrik dan Bahan Bakar Rumah Tangga,2024,Maret
+0.24,Listrik dan Bahan Bakar Rumah Tangga,2024,April
+-0.02,Listrik dan Bahan Bakar Rumah Tangga,2024,Mei
+-0.19,Listrik dan Bahan Bakar Rumah Tangga,2024,Juni
+-0.19,Listrik dan Bahan Bakar Rumah Tangga,2024,Juli
+-0.19,Listrik dan Bahan Bakar Rumah Tangga,2024,Agustus
+1.07,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Januari
+1.17,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Februari
+1.26,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Maret
+1.41,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,April
+1.37,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Mei
+1.24,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Juni
+1.25,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Juli
+1.25,"Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",2024,Agustus
+2.08,"Furnitur, Perlengkapan dan Karpet",2024,Januari
+1.82,"Furnitur, Perlengkapan dan Karpet",2024,Februari
+1.82,"Furnitur, Perlengkapan dan Karpet",2024,Maret
+1.82,"Furnitur, Perlengkapan dan Karpet",2024,April
+1.82,"Furnitur, Perlengkapan dan Karpet",2024,Mei
+1.82,"Furnitur, Perlengkapan dan Karpet",2024,Juni
+1.95,"Furnitur, Perlengkapan dan Karpet",2024,Juli
+1.95,"Furnitur, Perlengkapan dan Karpet",2024,Agustus
+0.38,Tekstil Rumah Tangga,2024,Januari
+0.38,Tekstil Rumah Tangga,2024,Februari
+0.38,Tekstil Rumah Tangga,2024,Maret
+0,Tekstil Rumah Tangga,2024,April
+0,Tekstil Rumah Tangga,2024,Mei
+0,Tekstil Rumah Tangga,2024,Juni
+0.92,Tekstil Rumah Tangga,2024,Juli
+0.92,Tekstil Rumah Tangga,2024,Agustus
+-0.8,Peralatan Rumah Tangga,2024,Januari
+-0.58,Peralatan Rumah Tangga,2024,Februari
+-0.41,Peralatan Rumah Tangga,2024,Maret
+0.02,Peralatan Rumah Tangga,2024,April
+0.32,Peralatan Rumah Tangga,2024,Mei
+0.15,Peralatan Rumah Tangga,2024,Juni
+0.32,Peralatan Rumah Tangga,2024,Juli
+0.53,Peralatan Rumah Tangga,2024,Agustus
+1.55,Barang Pecah Belah dan Peralatan Makan Minum,2024,Januari
+0.5,Barang Pecah Belah dan Peralatan Makan Minum,2024,Februari
+1.28,Barang Pecah Belah dan Peralatan Makan Minum,2024,Maret
+1.51,Barang Pecah Belah dan Peralatan Makan Minum,2024,April
+1.93,Barang Pecah Belah dan Peralatan Makan Minum,2024,Mei
+2.47,Barang Pecah Belah dan Peralatan Makan Minum,2024,Juni
+2.25,Barang Pecah Belah dan Peralatan Makan Minum,2024,Juli
+1.9,Barang Pecah Belah dan Peralatan Makan Minum,2024,Agustus
+3.68,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Januari
+0.22,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Februari
+0.22,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Maret
+0,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,April
+0,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Mei
+0.58,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Juni
+0.58,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Juli
+0.24,Peralatan dan Perlengkapan Perumahan dan Kebun,2024,Agustus
+1.21,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Januari
+1.62,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Februari
+1.65,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Maret
+1.8,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,April
+1.61,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Mei
+1.38,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Juni
+1.28,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Juli
+1.26,Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin,2024,Agustus
+1.11,Kesehatan,2024,Januari
+1.12,Kesehatan,2024,Februari
+0.78,Kesehatan,2024,Maret
+0.47,Kesehatan,2024,April
+0.54,Kesehatan,2024,Mei
+0.1,Kesehatan,2024,Juni
+0.04,Kesehatan,2024,Juli
+0.53,Kesehatan,2024,Agustus
+3.1,Obat-obatan dan Produk Kesehatan,2024,Januari
+3.03,Obat-obatan dan Produk Kesehatan,2024,Februari
+2.07,Obat-obatan dan Produk Kesehatan,2024,Maret
+1.23,Obat-obatan dan Produk Kesehatan,2024,April
+1.41,Obat-obatan dan Produk Kesehatan,2024,Mei
+0.17,Obat-obatan dan Produk Kesehatan,2024,Juni
+0.01,Obat-obatan dan Produk Kesehatan,2024,Juli
+1.36,Obat-obatan dan Produk Kesehatan,2024,Agustus
+0,Jasa Rawat Jalan,2024,Januari
+0,Jasa Rawat Jalan,2024,Februari
+0,Jasa Rawat Jalan,2024,Maret
+0,Jasa Rawat Jalan,2024,April
+0,Jasa Rawat Jalan,2024,Mei
+0,Jasa Rawat Jalan,2024,Juni
+0,Jasa Rawat Jalan,2024,Juli
+0,Jasa Rawat Jalan,2024,Agustus
+0,Jasa Rawat Inap,2024,Januari
+0,Jasa Rawat Inap,2024,Februari
+0,Jasa Rawat Inap,2024,Maret
+0,Jasa Rawat Inap,2024,April
+0,Jasa Rawat Inap,2024,Mei
+0,Jasa Rawat Inap,2024,Juni
+0,Jasa Rawat Inap,2024,Juli
+0,Jasa Rawat Inap,2024,Agustus
+0,Jasa Kesehatan Lainnya,2024,Januari
+0.75,Jasa Kesehatan Lainnya,2024,Februari
+0.75,Jasa Kesehatan Lainnya,2024,Maret
+0.75,Jasa Kesehatan Lainnya,2024,April
+0.75,Jasa Kesehatan Lainnya,2024,Mei
+0.75,Jasa Kesehatan Lainnya,2024,Juni
+0.75,Jasa Kesehatan Lainnya,2024,Juli
+0.75,Jasa Kesehatan Lainnya,2024,Agustus
+2.68,Transportasi,2024,Januari
+2.33,Transportasi,2024,Februari
+1.41,Transportasi,2024,Maret
+1.67,Transportasi,2024,April
+1.26,Transportasi,2024,Mei
+1.98,Transportasi,2024,Juni
+1.47,Transportasi,2024,Juli
+2.2,Transportasi,2024,Agustus
+2.72,Pembelian Kendaraan,2024,Januari
+2.4,Pembelian Kendaraan,2024,Februari
+2.5,Pembelian Kendaraan,2024,Maret
+1.79,Pembelian Kendaraan,2024,April
+1.72,Pembelian Kendaraan,2024,Mei
+1.83,Pembelian Kendaraan,2024,Juni
+1.92,Pembelian Kendaraan,2024,Juli
+1.46,Pembelian Kendaraan,2024,Agustus
+0.87,Pengoperasian Peralatan Transportasi Pribadi,2024,Januari
+0.57,Pengoperasian Peralatan Transportasi Pribadi,2024,Februari
+0.02,Pengoperasian Peralatan Transportasi Pribadi,2024,Maret
+0.06,Pengoperasian Peralatan Transportasi Pribadi,2024,April
+0.12,Pengoperasian Peralatan Transportasi Pribadi,2024,Mei
+1.15,Pengoperasian Peralatan Transportasi Pribadi,2024,Juni
+1.12,Pengoperasian Peralatan Transportasi Pribadi,2024,Juli
+1.66,Pengoperasian Peralatan Transportasi Pribadi,2024,Agustus
+9.86,Jasa Angkutan Penumpang,2024,Januari
+9.2,Jasa Angkutan Penumpang,2024,Februari
+4.25,Jasa Angkutan Penumpang,2024,Maret
+7.51,Jasa Angkutan Penumpang,2024,April
+4.51,Jasa Angkutan Penumpang,2024,Mei
+5.5,Jasa Angkutan Penumpang,2024,Juni
+1.76,Jasa Angkutan Penumpang,2024,Juli
+6.07,Jasa Angkutan Penumpang,2024,Agustus
+0,Jasa Pengiriman Barang,2024,Januari
+0,Jasa Pengiriman Barang,2024,Februari
+0,Jasa Pengiriman Barang,2024,Maret
+0,Jasa Pengiriman Barang,2024,April
+0,Jasa Pengiriman Barang,2024,Mei
+1.02,Jasa Pengiriman Barang,2024,Juni
+1.02,Jasa Pengiriman Barang,2024,Juli
+1.02,Jasa Pengiriman Barang,2024,Agustus
+-0.89,"Informasi, Komunikasi dan Jasa Keuangan",2024,Januari
+-1.12,"Informasi, Komunikasi dan Jasa Keuangan",2024,Februari
+-0.99,"Informasi, Komunikasi dan Jasa Keuangan",2024,Maret
+-0.79,"Informasi, Komunikasi dan Jasa Keuangan",2024,April
+-0.74,"Informasi, Komunikasi dan Jasa Keuangan",2024,Mei
+-0.86,"Informasi, Komunikasi dan Jasa Keuangan",2024,Juni
+-0.54,"Informasi, Komunikasi dan Jasa Keuangan",2024,Juli
+-0.72,"Informasi, Komunikasi dan Jasa Keuangan",2024,Agustus
+-3.42,Peralatan Informasi dan Komunikasi,2024,Januari
+-4.08,Peralatan Informasi dan Komunikasi,2024,Februari
+-3.71,Peralatan Informasi dan Komunikasi,2024,Maret
+-3.13,Peralatan Informasi dan Komunikasi,2024,April
+-3.02,Peralatan Informasi dan Komunikasi,2024,Mei
+-3.38,Peralatan Informasi dan Komunikasi,2024,Juni
+-2.38,Peralatan Informasi dan Komunikasi,2024,Juli
+-2.99,Peralatan Informasi dan Komunikasi,2024,Agustus
+0.36,Layanan Informasi dan Komunikasi,2024,Januari
+0.36,Layanan Informasi dan Komunikasi,2024,Februari
+0.36,Layanan Informasi dan Komunikasi,2024,Maret
+0.36,Layanan Informasi dan Komunikasi,2024,April
+0.36,Layanan Informasi dan Komunikasi,2024,Mei
+0.36,Layanan Informasi dan Komunikasi,2024,Juni
+0.36,Layanan Informasi dan Komunikasi,2024,Juli
+0.36,Layanan Informasi dan Komunikasi,2024,Agustus
+0,Jasa Keuangan,2024,Januari
+0,Jasa Keuangan,2024,Februari
+0,Jasa Keuangan,2024,Maret
+0,Jasa Keuangan,2024,April
+0,Jasa Keuangan,2024,Mei
+0,Jasa Keuangan,2024,Juni
+0,Jasa Keuangan,2024,Juli
+0,Jasa Keuangan,2024,Agustus
+0.02,"Rekreasi, Olahraga dan Budaya",2024,Januari
+0.05,"Rekreasi, Olahraga dan Budaya",2024,Februari
+0.08,"Rekreasi, Olahraga dan Budaya",2024,Maret
+0.15,"Rekreasi, Olahraga dan Budaya",2024,April
+-0.07,"Rekreasi, Olahraga dan Budaya",2024,Mei
+-0.04,"Rekreasi, Olahraga dan Budaya",2024,Juni
+0.12,"Rekreasi, Olahraga dan Budaya",2024,Juli
+0.28,"Rekreasi, Olahraga dan Budaya",2024,Agustus
+-0.83,Barang Rekreasi Lainnya dan Olahraga,2024,Januari
+-0.48,Barang Rekreasi Lainnya dan Olahraga,2024,Februari
+-0.48,Barang Rekreasi Lainnya dan Olahraga,2024,Maret
+-0.22,Barang Rekreasi Lainnya dan Olahraga,2024,April
+-1.18,Barang Rekreasi Lainnya dan Olahraga,2024,Mei
+-1.18,Barang Rekreasi Lainnya dan Olahraga,2024,Juni
+-1.18,Barang Rekreasi Lainnya dan Olahraga,2024,Juli
+-0.35,Barang Rekreasi Lainnya dan Olahraga,2024,Agustus
+0.31,Layanan Rekreasi dan Olahraga,2024,Januari
+0.31,Layanan Rekreasi dan Olahraga,2024,Februari
+0.31,Layanan Rekreasi dan Olahraga,2024,Maret
+0.25,Layanan Rekreasi dan Olahraga,2024,April
+0.25,Layanan Rekreasi dan Olahraga,2024,Mei
+0.25,Layanan Rekreasi dan Olahraga,2024,Juni
+0.75,Layanan Rekreasi dan Olahraga,2024,Juli
+0.49,Layanan Rekreasi dan Olahraga,2024,Agustus
+0,Layanan Kebudayaan,2024,Januari
+0,Layanan Kebudayaan,2024,Februari
+0,Layanan Kebudayaan,2024,Maret
+0,Layanan Kebudayaan,2024,April
+2.45,Layanan Kebudayaan,2024,Mei
+2.45,Layanan Kebudayaan,2024,Juni
+2.45,Layanan Kebudayaan,2024,Juli
+2.45,Layanan Kebudayaan,2024,Agustus
+0.75,"Koran, Buku dan Perlengkapan Sekolah",2024,Januari
+0.4,"Koran, Buku dan Perlengkapan Sekolah",2024,Februari
+0.51,"Koran, Buku dan Perlengkapan Sekolah",2024,Maret
+0.48,"Koran, Buku dan Perlengkapan Sekolah",2024,April
+0.48,"Koran, Buku dan Perlengkapan Sekolah",2024,Mei
+0.58,"Koran, Buku dan Perlengkapan Sekolah",2024,Juni
+0.58,"Koran, Buku dan Perlengkapan Sekolah",2024,Juli
+0.39,"Koran, Buku dan Perlengkapan Sekolah",2024,Agustus
+2.05,Pendidikan,2024,Januari
+2.05,Pendidikan,2024,Februari
+2.05,Pendidikan,2024,Maret
+2.05,Pendidikan,2024,April
+2.05,Pendidikan,2024,Mei
+2.05,Pendidikan,2024,Juni
+1.01,Pendidikan,2024,Juli
+0.93,Pendidikan,2024,Agustus
+4.68,Pendidikan Dasar dan Anak Usia Dini,2024,Januari
+4.68,Pendidikan Dasar dan Anak Usia Dini,2024,Februari
+4.68,Pendidikan Dasar dan Anak Usia Dini,2024,Maret
+4.68,Pendidikan Dasar dan Anak Usia Dini,2024,April
+4.68,Pendidikan Dasar dan Anak Usia Dini,2024,Mei
+4.68,Pendidikan Dasar dan Anak Usia Dini,2024,Juni
+2.48,Pendidikan Dasar dan Anak Usia Dini,2024,Juli
+0.57,Pendidikan Dasar dan Anak Usia Dini,2024,Agustus
+1.47,Pendidikan Menengah,2024,Januari
+1.47,Pendidikan Menengah,2024,Februari
+1.47,Pendidikan Menengah,2024,Maret
+1.47,Pendidikan Menengah,2024,April
+1.47,Pendidikan Menengah,2024,Mei
+1.47,Pendidikan Menengah,2024,Juni
+0.74,Pendidikan Menengah,2024,Juli
+0.74,Pendidikan Menengah,2024,Agustus
+0.33,Pendidikan Tinggi,2024,Januari
+0.33,Pendidikan Tinggi,2024,Februari
+0.33,Pendidikan Tinggi,2024,Maret
+0.33,Pendidikan Tinggi,2024,April
+0.33,Pendidikan Tinggi,2024,Mei
+0.33,Pendidikan Tinggi,2024,Juni
+0.33,Pendidikan Tinggi,2024,Juli
+1.73,Pendidikan Tinggi,2024,Agustus
+2.15,Pendidikan Lainnya,2024,Januari
+2.15,Pendidikan Lainnya,2024,Februari
+2.15,Pendidikan Lainnya,2024,Maret
+2.15,Pendidikan Lainnya,2024,April
+2.15,Pendidikan Lainnya,2024,Mei
+2.15,Pendidikan Lainnya,2024,Juni
+0,Pendidikan Lainnya,2024,Juli
+0,Pendidikan Lainnya,2024,Agustus
+1.92,Penyediaan Makanan dan Minuman / Restoran,2024,Januari
+2.39,Penyediaan Makanan dan Minuman / Restoran,2024,Februari
+3.43,Penyediaan Makanan dan Minuman / Restoran,2024,Maret
+4.11,Penyediaan Makanan dan Minuman / Restoran,2024,April
+4.29,Penyediaan Makanan dan Minuman / Restoran,2024,Mei
+3.52,Penyediaan Makanan dan Minuman / Restoran,2024,Juni
+3.6,Penyediaan Makanan dan Minuman / Restoran,2024,Juli
+3.03,Penyediaan Makanan dan Minuman / Restoran,2024,Agustus
+1.92,Jasa Pelayanan Makanan dan Minuman,2024,Januari
+2.39,Jasa Pelayanan Makanan dan Minuman,2024,Februari
+3.43,Jasa Pelayanan Makanan dan Minuman,2024,Maret
+4.11,Jasa Pelayanan Makanan dan Minuman,2024,April
+4.29,Jasa Pelayanan Makanan dan Minuman,2024,Mei
+3.52,Jasa Pelayanan Makanan dan Minuman,2024,Juni
+3.6,Jasa Pelayanan Makanan dan Minuman,2024,Juli
+3.03,Jasa Pelayanan Makanan dan Minuman,2024,Agustus
+1.92,Perawatan Pribadi dan Jasa Lainnya,2024,Januari
+1.79,Perawatan Pribadi dan Jasa Lainnya,2024,Februari
+2.1,Perawatan Pribadi dan Jasa Lainnya,2024,Maret
+3.68,Perawatan Pribadi dan Jasa Lainnya,2024,April
+4.3,Perawatan Pribadi dan Jasa Lainnya,2024,Mei
+4.69,Perawatan Pribadi dan Jasa Lainnya,2024,Juni
+5.32,Perawatan Pribadi dan Jasa Lainnya,2024,Juli
+5.93,Perawatan Pribadi dan Jasa Lainnya,2024,Agustus
+1.71,Perawatan Pribadi,2024,Januari
+1.21,Perawatan Pribadi,2024,Februari
+1.04,Perawatan Pribadi,2024,Maret
+0.95,Perawatan Pribadi,2024,April
+0.92,Perawatan Pribadi,2024,Mei
+1.19,Perawatan Pribadi,2024,Juni
+1.39,Perawatan Pribadi,2024,Juli
+1.88,Perawatan Pribadi,2024,Agustus
+2.59,Perawatan Pribadi Lainnya,2024,Januari
+3.18,Perawatan Pribadi Lainnya,2024,Februari
+4.52,Perawatan Pribadi Lainnya,2024,Maret
+9.63,Perawatan Pribadi Lainnya,2024,April
+11.69,Perawatan Pribadi Lainnya,2024,Mei
+12.37,Perawatan Pribadi Lainnya,2024,Juni
+13.9,Perawatan Pribadi Lainnya,2024,Juli
+14.81,Perawatan Pribadi Lainnya,2024,Agustus
+0,Perlindungan Sosial,2024,Januari
+0,Perlindungan Sosial,2024,Februari
+0,Perlindungan Sosial,2024,Maret
+0,Perlindungan Sosial,2024,April
+0,Perlindungan Sosial,2024,Mei
+0,Perlindungan Sosial,2024,Juni
+1.25,Perlindungan Sosial,2024,Juli
+1.25,Perlindungan Sosial,2024,Agustus
+0,Jasa Lainnya,2024,Januari
+0,Jasa Lainnya,2024,Februari
+0,Jasa Lainnya,2024,Maret
+0,Jasa Lainnya,2024,April
+0,Jasa Lainnya,2024,Mei
+0,Jasa Lainnya,2024,Juni
+0,Jasa Lainnya,2024,Juli
+0,Jasa Lainnya,2024,Agustus
