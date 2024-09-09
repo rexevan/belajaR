@@ -34,3 +34,15 @@ tbl5_full <- bind_rows(
   arrange(kecamatan_subdistrict, tabel, nomor_komoditas)
 
 write_csv2(tbl5_full, "Tabel_BAB_5_Siap.csv")
+
+# new script -------------------------
+library(tidyverse)
+
+read_rds("output/rds/tbl_51.rds")
+read_rds("output/rds/tbl_52.rds")
+read_rds("output/rds/tbl_53.rds")
+read_rds("output/rds/tbl_55.rds")
+read_rds("output/rds/tbl_57.rds")
+
+list.dirs("output/rds")   
+list.files("output/rds/") 
