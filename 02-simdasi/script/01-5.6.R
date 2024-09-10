@@ -133,7 +133,7 @@ tbl_komoditas_56 <- tibble(
     ,"mawar_rose"
     ,"sedap_malam"
     ,"anthurium_bunga"
-    ,"bugenvil"
+    ,"bugenvil_pohon"
     ,"palem_palm"
     ,"pedang_pedangan"
     ,"pisang_pisangan"
@@ -141,7 +141,7 @@ tbl_komoditas_56 <- tibble(
     ,"soka_ixora"
     ,"sri_rejeki"
   ),
-  nomor_komoditas = c(1:13)
+  no_komoditas = c(1:13)
 )
 
 

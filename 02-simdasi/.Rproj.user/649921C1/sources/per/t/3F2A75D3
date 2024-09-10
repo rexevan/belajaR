@@ -3,7 +3,7 @@
     "path": "E:/Game/R/belajaR/02-simdasi/script/01-5.7.R",
     "project_path": "script/01-5.7.R",
     "type": "r_source",
-    "hash": "2709771185",
+    "hash": "2161106639",
     "contents": "",
     "dirty": false,
     "created": 1725929530118.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "22,0",
-        "scrollLine": "4"
+        "cursorPosition": "123,18",
+        "scrollLine": "109"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725924758,
+    "lastKnownWriteTime": 1725947953,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725924758,
+    "last_content_update": 1725947953210,
     "read_only": false,
     "read_only_alternatives": []
 }

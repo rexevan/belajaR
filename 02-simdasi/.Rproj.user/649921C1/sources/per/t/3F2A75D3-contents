@@ -153,7 +153,7 @@ tbl_komoditas_57 <- tibble(
     # ,"sirsak_soursop"    
     # ,"sukun_breadfruit"  
   ),
-  nomor_komoditas = c(1:6)
+  no_komoditas = c(1:6)
 )
 
 

@@ -79,7 +79,7 @@ tbl_komoditas_53 <- tibble(
     ,"kencur_east"
     ,"kunyit_turmeric"
   ),
-  nomor_komoditas = c(1:4)
+  no_komoditas = c(1:4)
 )
 
 
