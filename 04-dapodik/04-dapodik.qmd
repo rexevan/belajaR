@@ -1,0 +1,145 @@
+---
+title: "Olah Data TK (dari Dapodik)"
+author: "Rex Evan"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+# Regular Expression
+
+Sebelum mulai, mari latihan menggunakan regex dulu. 
+dari nama-nama file dapodik, ambil nama-nama kecamatan. 
+
+
+`Kec. [^-]+`
+1. String yang ingin diekstrak, dimulai dengan string `Kec. ` (termasuk karakter spasi)
+2. Tanda `-` merupakan tanda batas. Kita ingin mengambil semua karakter sebelum tanda `-`
+3. Tanda `^` menunjukkan *awal dari suatu string*. **Akan tetapi**, dalam kasus ini tanda `^` ada di dalam `[]` yang punya arti berbeda. 
+4. `[^ ]` merujuk kepada *karakter yang bukan ...*. Dalam kasus ini `[^-]` merujuk kepada *karakter yang bukan* `-`
+5. Tanda `+` adalah *quantifiers*, merujuk pada *1 atau lebih karakter*.
+
+lalu kenapa `Kec. [^-]+` tidak juga mengekstrak karakter-karakter **setelah** tanda `-`? .
+Karena dalam `Kec. [^-]+` **tidak meninta apapun setelah tanda** `-`. Jadi `str_extract` tidak melanjutkan pencarian. 
+
+
+```{r}
+#| include: false
+
+
+list.files("data/") |> str_extract("Kec. ([^-])+") |> word(2,-1) |>str_squish()
+
+list.files("data/") |> str_extract("Kec. .+")
+list.files("data/") |> str_extract("Kec. [^-]+") |> str_squish() |> str_remove("Kec.")
+
+
+list.files("data/") |> str_extract("Kec. [^-]+")
+
+list.files("data/") |> str_extract("Kec. ([^-])+")
+list.files("data/") |> str_extract("Kec. [^-]+")
+```
+
+# Coba kerjakan 1 observasi
+
+```{r}
+lokasi_file <- "data/Data Sekolah Kec. Alok - Dapodikdasmen.xlsx" 
+
+lokasi_file |>
+    readxl::read_xlsx(skip = 1) |>
+    janitor::clean_names() |>
+    filter(bp == "TK")
+
+```
+
+# make it a function
+
+```{r}
+ambil_data_tk_dapodik <- function(file_path = file_path) {
+    
+    pacman::p_load(tidyverse)
+    
+    y <- file_path |>
+    readxl::read_xlsx(skip = 1) |>
+    janitor::clean_names() |>
+    filter(bp == "TK")
+    
+    return(y)
+}
+```
+
+# Coba purrr
+
+```{r}
+tbl_tkk <- tibble(
+    lokasi_file = paste0("data/", list.files("data/"))
+) |>
+    transmute(
+        kec = lokasi_file |> str_extract("Kec. ([^-])+") |> word(2,-1) |>str_squish(), 
+        tbl_dapodik = map(lokasi_file, ambil_data_tk_dapodik)
+    ) |> 
+    unnest(tbl_dapodik)
+
+tbl_tkk
+```
+
+# Identifikasi kolom
+
+-   kec : Kecamatan
+-   no : nomor baris
+-   nama_sekolah : Nama Sekolah
+-   npsn : Nomor sesuatu sesuatu
+-   bp : tingkatan pendidikan
+-   status : status sekolah (Swasta / Negeri)
+-   last_sync : waktu sinkronisasi terakhir
+-   jml_sync : frekuensi sinkronisasi
+-   pd : jumlah peserta didik
+-   rombel : rombongan belajar (kelas)
+-   guru : jumlah guru
+-   pegawai : jumlah pegawai
+-   r_kelas : jumlah ruang kelas
+-   r_lab : jumlah ruang laboratorium
+-   r_perpus : jumlah perpustakaan
+
+## menghitung jumlah sekolah, guru, dan murid menurut status sekolah dan kecamatan 
+
+```{r}
+
+tbl_tkk
+
+tbl_tkk |> 
+    group_by(kec, status) |>
+    count(sort = TRUE) |>
+    pivot_wider(names_from = status, values_from = n)
+    
+
+
+tbl_tkk_siap 
+
+tbl_tkk |>
+    group_by(kec, status) |>
+    summarise(
+        murid = sum(pd),
+        guru = sum(guru), 
+        sekolah = n()
+    ) |> ungroup() |>
+    pivot_longer(cols = murid:sekolah) |>
+    pivot_wider(names_from = status, values_from = value) |>
+    mutate(
+        Negeri = Negeri |> replace_na(0),
+        Swasta = Swasta |> replace_na(0),
+        Jumlah = Negeri  + Swasta
+    )
+```
+
+# save it
+
+```{r}
+write_rds(tbl_tkk_siap, "output/rds/tabel_tkk.rds")
+write_csv(tbl_tkk_siap, "output/csv/tabel_tkk.csv")
+```
+
+
