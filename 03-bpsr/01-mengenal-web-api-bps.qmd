@@ -1,0 +1,91 @@
+---
+title: "Mengenal Web API BPS dengan bpsr"
+author: "Rex Evan"
+format: html
+---
+
+## Web API BPS
+
+Web API Badan Pusat Statistik adalah salah satu fitur dari Pelayanan Statistik Terpadu (PST).
+Silahkan menuju [situs web PST](https://pst.bps.go.id/) atau [situs web API BPS](https://webapi.bps.go.id/developer/) untuk mendaftar akun atau login.
+Pastikan dulu teman-teman punya Web API Key, jika belum punya.
+
+Untuk menginstall paket `bpsr` bisa menggunakan 
+
+```
+install.packages("devtools")
+devtools::install_github("dzulfiqarfr/bpsr")
+```
+
+## Load packages dan set up Web API Key
+
+```{r}
+library(tidyverse)
+library(bpsr)
+bps_set_key()
+
+```
+
+## Baca Dokumentasi. 
+
+Untuk WebAPI, silahkan baca [Web API Documentation](https://webapi.bps.go.id/documentation/).
+
+**semua** fungsi dari paket ini dimulai dengan `bps_`.
+
+
+## Domain,Subject, dan Subject Categories
+
+```{r}
+
+tbl_domain <- bps_domain()
+tbl_subject <- bps_subject()
+tbl_subject_cat <- bps_subject_category()
+
+tbl_domain
+tbl_domain |> filter(domain_id == "5310")
+
+tbl_subject
+tbl_subject_cat
+```
+
+- `tbl_domain` menunjukkan situs web dari masing-masing satker (Kabupaten, Provinsi, dan Pusat). 
+- `tbl_subject`  (entalah ini apa)
+- `tbl_subject_cat`menunjukkan subkategori (entahlah ini apa)
+
+
+## Dynamic Data 
+
+Ini adalah tabel dinamis yang ada di situs web. Tabel dinamis dimulai dengan `https://webapi.bps.go.id/v1/api/list`. 
+
+Contoh, link JSON untuk mendownload tabel dinamis [Indeks Keparahan Kemiskinan (P2)](https://sikkakab.bps.go.id/id/statistics-table/2/MTAxIzI=/indeks-keparahan-kemiskinan--p2-.html) adalah **https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/101/key/WebAPI_KEY**. 
+
+Okay, mari kita menguraikan url diatas. Secara sederhana, setelah bagian awalan, selanjutnya adalah pasangan.
+
+1. awalan `https://webapi.bps.go.id/v1/api/list`
+2. `model` berpasangan dengan `data`.
+3. `lang` dengan `ind`, merujuk ke bahasa indonesia
+4. `domain` dengan `5310`, merujuk ke situs BPS Kabupaten.
+5. `var` dengan `101`
+6.  `key` dengan `WebAPI_KEY`
+
+```{r}
+tbl_5310_p2 <- bps_dataset(
+    domain_id = "5310", vertical_var_group_id = "101"
+)
+```
+
+```{r}
+tbl_5310_p2 <- bps_dataset(
+    domain_id = "5310", subject_id = "101"
+)
+
+
+bps_
+
+```
+
+
+
+
+
+
