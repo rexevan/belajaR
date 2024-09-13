@@ -22,7 +22,7 @@ devtools::install_github("dzulfiqarfr/bpsr")
 ```{r}
 library(tidyverse)
 library(bpsr)
-bps_set_key()
+bps_set_key(key = Sys.getenv("WebAPI_KEY"))
 
 ```
 
@@ -38,8 +38,8 @@ Untuk WebAPI, silahkan baca [Web API Documentation](https://webapi.bps.go.id/doc
 ```{r}
 
 tbl_domain <- bps_domain()
-tbl_subject <- bps_subject()
-tbl_subject_cat <- bps_subject_category()
+tbl_subject <- bps_subject(page = Inf)
+tbl_subject_cat <- bps_subject_category(page = Inf)
 
 tbl_domain
 tbl_domain |> filter(domain_id == "5310")
@@ -66,23 +66,136 @@ Okay, mari kita menguraikan url diatas. Secara sederhana, setelah bagian awalan,
 3. `lang` dengan `ind`, merujuk ke bahasa indonesia
 4. `domain` dengan `5310`, merujuk ke situs BPS Kabupaten.
 5. `var` dengan `101`
-6.  `key` dengan `WebAPI_KEY`
+6. `key` dengan `WebAPI_KEY`
+
+Sementara itu dalam paket `bpsr`, fungsi yang digunakan untuk mengambil data adalah `bps_get_dataset()`
 
 ```{r}
-tbl_5310_p2 <- bps_dataset(
-    domain_id = "5310", vertical_var_group_id = "101"
-)
+bps_get_dataset
+
+?bps_get_dataset()
 ```
 
 ```{r}
-tbl_5310_p2 <- bps_dataset(
-    domain_id = "5310", subject_id = "101"
-)
+bps_dataset(subcsa_id == "101")
+bps_get_dataset(domain_id = "5310")
 
+bps_dataset(subject_id ="23") |>
+    select(title)
 
-bps_
+bps_dataset(subject_id ="23", domain_id = "5310")
 
 ```
+
+Dari tabel diatas, bisa diketahui bahwa `101` yang ada di `var` adalah isi kolom dari `dataset_id`.
+
+Sekarang kita coba ambil datasetnya, menggunakan fungsi `bps_get_dataset()`
+
+```{r}
+tbl_5310_test <- bps_get_dataset(domain_id = "5310", dataset_id = "101")
+
+tbl_5310_test
+bps_metadata(tbl_5310_test)
+```
+
+Yep! Kita berhasil menemukan data tersebut menggunakan `bpsr`. \(^_^)/
+
+Sekarang, mari kita coba ambil data dari kabupaten lain.
+
+```{r}
+bps_get_dataset(domain_id = "5311", dataset_id = "101")
+```
+
+
+Oh Shoot!, sepertinya satker 5311 tidak memiliki data tersebut, atau bisa jadi tabel tersebut ada di dataset id yang lain.
+
+```{r}
+bps_dataset(subject_id ="23", domain_id = "5311")
+```
+
+Terlihat kalau dataset Indeks Keparahan Kemiskinan (P2) di satker 5311 ada di `dataset_id` nomor 441.
+Ini menunjukkan bahwa dataset_id untuk masing-masing satker bisa berbeda-beda.
+
+```{r}
+tbl_5311_p2 <- bps_get_dataset(dataset_id = "441", domain_id = "5311")
+tbl_5311_p2
+
+bps_metadata(tbl_5311_p2)
+```
+
+Hm...Mari kita cek data dari BPS Provinsi. 
+
+```{r}
+bps_dataset(subject_id ="23", domain_id = "5300") |>
+    View("Provinsi")
+```
+
+Di BPS Provinsi malah `dataset_id` nomor 61. Oke fix! `dataset_id` masing-masing tabel berbeda.
+
+Menarik! Sepertinya bisa dipakai untuk monitoring update tabel website, tapi khusus yang tabel dinamis keknya.
+Untuk sekarang, kita lanjut belajar mengenai paket `bpsr`.
+
+## Census Data 
+
+*header speaks for itself*. ini untuk mengambil data-data mengenai sensus. Tapi tentu saja bukan data mikro sensus. 
+Request untuk data sensus dawali dengan `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/sensus/id/38/`
+
+
+Tapi sepertinya memang belum ada fungsi `bps_census()` di paket `bpsr`. Mungkin bisa dipakai cara yang lain.
+
+
+
+## SIMDASI 
+
+Belum ada juga `bps_simdasi()` dari paket `bpsr`, sehingga bisa menjadi motivasi untuk project  `01-api`.
+
+
+## Static Table
+
+Untuk mencari Tabel Statis. Lebih sederhana daripada tabel dinamis.
+
+```{r}
+bps_search(model = "statictable", domain_id = "5310", page = 1)
+```
+
+
+## CSA Subject 
+
+
+```{r}
+bps_subject_category()
+```
+
+
+## Press Release
+
+Untuk mencari Berita Resmi Statistik (BRS)
+
+```{r}
+bps_search(model = "pressrelease", keyword = "miskin", domain_id = "5310")
+
+bps_search(model = "pressrelease", domain_id = "5310", page = c(1:2))
+```
+
+
+## Publication 
+
+```{r}
+
+library(tidyverse)
+bps_search(model = "publication", domain_id = "5310", page = c(1:3)) |>
+    mutate(released = released |> as_date()) |> 
+    filter(released > ymd("2022-01-01"))
+```
+
+
+
+## Strategic Indicator
+
+
+*Not interested right now*.
+
+
 
 
 
