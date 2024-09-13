@@ -1,6 +1,6 @@
 
 
-list_to_tabular_bps <- function(data = list_data) {
+bps_dt_list2tbl <- function(data = list_data) {
     pacman::p_load(tidyverse)
     
     tambah_prefix <- function(tbl, prefix = "prefix_") {
@@ -59,10 +59,15 @@ list_to_tabular_bps <- function(data = list_data) {
     }
 
 
-GET_url_bps <- function(txt_Endpoint_WebAPI, WebAPI_KEY) {
+bps_dt_url2list <- function(Endpoint_WebAPI, WebAPI_KEY = NULL) {
 
-    url <- link_tabel |> 
-        str_replace("WebAPI_KEY", WebAPI_KEY)
+    if(is.null(WebAPI_KEY)) {
+        WebAPI_KEY = Sys.getenv("WebAPI_KEY")
+    } 
+    
+    WebAPI_KEY <- WebAPI_KEY
+    
+    url <- sub(x = Endpoint_WebAPI, pattern = "WebAPI_KEY", WebAPI_KEY)
     
     get_url <- httr::GET(url)
     
@@ -75,11 +80,17 @@ GET_url_bps <- function(txt_Endpoint_WebAPI, WebAPI_KEY) {
 }
 
 
-tbl_dinamis_bps <- function(link_json = txt_Endpoint_WebAPI, WebAPI_Key = txt_WebAPI_key) {
+bps_dt_get <- function(Endpoint_WebAPI, WebAPI_KEY = NULL) {
     
-    list_data <- GET_url_bps(link_json, WebAPI_Key)
+    if(is.null(WebAPI_KEY)) {
+        WebAPI_KEY = Sys.getenv("WebAPI_KEY")
+    } 
     
-    tbl_bps <- list_to_tabular_bps(list_data)
+    WebAPI_KEY <- WebAPI_KEY
+    
+    list_data <- bps_dt_url2list(Endpoint_WebAPI, WebAPI_KEY)
+    
+    tbl_bps <- bps_dt_list2tbl(list_data)
     
     return(tbl_bps)
 }
