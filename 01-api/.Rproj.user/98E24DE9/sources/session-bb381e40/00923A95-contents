@@ -59,12 +59,10 @@ list_to_tabular_bps <- function(data = list_data) {
     }
 
 
-GET_url_bps <- function(txt_Endpoint_WebAPI, txt_WebAPI_key) {
+GET_url_bps <- function(txt_Endpoint_WebAPI, WebAPI_KEY) {
 
-    url <- paste0(
-         txt_Endpoint_WebAPI |> stringr::str_sub(1, -17),
-         txt_WebAPI_key
-    )
+    url <- link_tabel |> 
+        str_replace("WebAPI_KEY", WebAPI_KEY)
     
     get_url <- httr::GET(url)
     

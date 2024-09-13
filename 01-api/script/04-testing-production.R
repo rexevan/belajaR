@@ -3,8 +3,8 @@ library(magrittr)
 
 source("script/03-bikin-fungsi.R")
 
-link <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1715/key/%5BWebAPI_KEY%5D"
-api_key <- "3735d1f9790242bf0462a028e8016507"
+link <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1715/key/WebAPI_KEY"
+api_key <- Sys.getenv("WebAPI_KEY")
 
 
 

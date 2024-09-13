@@ -3,20 +3,15 @@ library(jsonlite)
 library(httr)
 
 # Ambil dari Key akun masing-masing
-# kunjungi https://webapi.bps.go.id/developer/ untuk daftar key API mu sendiri
-api_key <- Sys.getenv("WebAPI_KEY")
+# kunjungi https://webapi.bps.go.id/developer/ untuk daftar akun PST dan dapakaan key API mu sendiri
+WebAPI_KEY <- Sys.getenv("WebAPI_KEY")
 
 # tautan dari situs web BPS 
 # contoh, ini tuh dari https://sikkakab.bps.go.id/id/statistics-table/2/MjY5IzI=/andil-inflasi-y-on-y-kota-maumere--2022---100---persen-.html
 link_tabel <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/269/key/WebAPI_KEY"
 
-link_tabel |> 
-    str_replace("WebAPI_KEY", Sys.getenv("WebAPI_KEY"))
-
-url <- paste0(
-    link_tabel |> str_sub(1, -11),
-    api_key
-)
+url <- link_tabel |> 
+    str_replace("WebAPI_KEY", WebAPI_KEY)
 
 test <- httr::GET(url)
 test$status_code
