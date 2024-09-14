@@ -1,0 +1,27 @@
+{
+    "id": "989CE5C2",
+    "path": "E:/Game/R/belajaR/01-api/script/fun-simdasi.R",
+    "project_path": "script/fun-simdasi.R",
+    "type": "r_source",
+    "hash": "142731551",
+    "contents": "",
+    "dirty": false,
+    "created": 1726282517411.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "120,0",
+        "scrollLine": "64"
+    },
+    "folds": "36|69|62|0|\n69|80|102|0|\n",
+    "lastKnownWriteTime": 1726309387,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1726309387366,
+    "read_only": false,
+    "read_only_alternatives": []
+}
