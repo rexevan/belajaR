@@ -87,11 +87,12 @@ Ini adalah layanan API untuk mendapatkan data dari SIMDASI. Web SIMDASI sendiri 
 Dalam d
 
 ```{r}
+library(tidyverse)
 source("script/fun-simdasi.R")
 ```
 
 
-### DDA
+### Tabel DDA dan KCDA yang tersedia di SIMDASI 
 
 ```{r}
 # Daftar Tabel DDA yang tersedia di SIMDASI
@@ -102,104 +103,125 @@ tbl_dda_simdasi <- bps_simdasi_dda()
 
 tbl_dda_simdasi
 
-## Coba lihat tabel-tabel SIMDASI untuk DDA BPS Kabupaten/Kota -----------------
+tbl_kcda_master <- bps_simdasi_kcda(kode_wilayah = "5310000")
 
-tbl_dda_simdasi_kab <- tbl_dda_simdasi |>
-    filter(!is.na(kode_tabel_kabkota)) 
+
 ```
-
-### KCDA
-
-```{r}
-# bps_simdasi_kcda()
-tbl_kcda_master <- bps_simdasi_kcda(kode_satker = "5310")
-
-tbl_kcda_master
-```
-
 
 ### Akses Tabel DDA dan KCDA
 
 ```{r}
 # bps_simdasi_tabel()
-tbl_list <- bps_simdasi_tabel(kode_satker = 5310, tahun = 2023, id_tabel = "UFpWMmJZOVZlZTJnc1pXaHhDV1hPQT09") |>
+
+tbl_list <- 
+    bps_simdasi_tabel(
+        tahun = 2023, 
+        id_tabel = tbl_kcda_master$id_tabel[19],
+        kode_wilayah = "5310000"
+        ) |>
     slice(2) |>
     tibble()
 ```
 
+## Data Wrangling
 
-```{r}
-tbl_data <- tbl_list |> 
-    select(data) |> 
-    unnest(cols = data)
 
-tbl_keterangan <- tbl_list |> 
-    select(contains("keterangan_data")) |>
-    pivot_longer(cols = contains("keterangan"), names_to = "simbol", values_to = "keterangan") |>
-    mutate(simbol = str_remove(simbol, "keterangan_data\\."))
+
+```{r broom-like}
+names(tbl_list)
+
+
+## tidy : 1 baris per variabel
+
+bps_simdasi_list_tidy <- function(x) {
+    if(!is.list(x)){stop("x harus memiliki class list")}
+    tbl_tidy <-     
+        x |> 
+        select(starts_with("kolom.")) |> 
+        mutate(across(.cols = everything(), .fns = ~ list(.x))) |> 
+        pivot_longer(cols = everything()) |> 
+        separate(col = name, into = c("txt_kolom", "variabel", "kolom3"), sep = "\\.") |> 
+        pivot_wider(names_from = kolom3, values_from = value) |> 
+        mutate(across(.cols = nama_variabel:angka_desimal_dibelakang_koma, .fns = ~ unlist(.x))) |> 
+        select(-txt_kolom)
     
-tbl_variabel <- tbl_list |> 
-    select(contains("nama_variabel")) |>
-    pivot_longer(cols = contains("kolom"), names_to = "simbol", values_to = "keterangan") |>
-    separate(col = simbol, into = c("kolom", "id_variabel", "akhir"), sep = "\\.") |>
-    pivot_wider(names_from = akhir, values_from = keterangan)
+    return(tbl_tidy)
 
-## 1 baris untuk 1 variabel
-
-bps_simdasi_tbl_list2tidy <- function(tbl_list, nama_kolom) {
-    
-    tbl_tidy <-
-        tbl_list |> 
-        select(contains(nama_kolom)) |>
-        pivot_longer(cols = contains(nama_kolom)) |>
-        separate(col = name, into = c("kolom", "id_variabel", "kolom3"), sep = "\\.") |>
-        pivot_wider(names_from = kolom3, values_from = value) |>
-        select(-kolom)
-        
-     return(tbl_tidy)
 }
 
-tbl_list |>
-    bps_simdasi_tbl_list2tidy("angka_desimal_dibelakang_koma")
+tbl_data_tidy <- bps_simdasi_list_tidy(tbl_list)
 
-tbl_metadata <- tbl_list |> 
-    select(contains("metadata")) |>
-    pivot_longer(cols = contains("metadata")) |>
-    separate(col = name, into = c("kolom", "id_variabel", "kolom3"), sep = "\\.") |>
-    pivot_wider(names_from = kolom3, values_from = value)
+## keterangan : huh....
 
-tbl_metadata
+bps_simdasi_list_ket <- function(x) {
+    
+    if(!is.list(x)){stop("x harus memiliki class list")}
+    
+    tbl_keterangan <- 
+        x |> 
+        select(contains("keterangan_data")) |>
+        pivot_longer(cols = contains("keterangan"), names_to = "simbol", values_to = "keterangan") |>
+        mutate(simbol = str_remove(simbol, "keterangan_data\\."))
+    
+    return(tbl_keterangan)
+}
+
+tbl_data_ket <- bps_simdasi_list_ket(tbl_list)
+
+## glance : 1 baris = 1 tabel
+
+bps_simdasi_list_glance <- function(x) {
+    
+    if(!is.list(x)){stop("x harus memiliki class list")}
+    
+    tbl_glance <- 
+        x |> 
+        select(!starts_with("keterangan_data") & !starts_with("kolom."))
+    
+    return(tbl_glance)
+}
+
+tbl_data_glance <- bps_simdasi_list_glance(tbl_list)
+
+## augment : 1 baris = 1 obersasi (kecamatan/desa)
+
+bps_simdasi_list_augment <- function(x) {
+    
+    if(!is.list(x)){stop("x harus memiliki class list")}
+
+    tbl_augment <- 
+        x |> 
+        bps_simdasi_list_glance() |>
+        select(data) |> 
+        unnest(data) |>
+        select(label:kode_wilayah, starts_with("variables.")) |>
+        pivot_longer(cols = starts_with("variables.")) |>
+        separate(col = name, into = c("txt_variabel", "variabel", "kolom3"), sep = "\\.") |>
+        pivot_wider(names_from = kolom3, values_from = value) |>
+        select(-txt_variabel)
+
+    return(tbl_augment)
+}
+
+tbl_augment <- bps_simdasi_list_augment(tbl_list) 
 
 
-tbl_tipe <- tbl_list |>
-    select(contains("tipe")) |>
-    pivot_longer(cols = contains("tipe")) |>
-    separate(col = name, into = c("kolom", "id_variabel", "kolom3"), sep = "\\.") |>
-    pivot_wider(names_from = kolom3, values_from = value)
 
-tbl_angka_desimal <- tbl_list |>
-    select(contains("angka_desimal")) |>
-    pivot_longer(cols = contains("angka_desimal")) |>
-    separate(col = name, into = c("kolom", "id_variabel", "kolom3"), sep = "\\.") |>
-    pivot_wider(names_from = kolom3, values_from = value)
+bps_simdasi_list_augment(tbl_list) |>
+    left_join(
+        bps_simdasi_list_tidy(tbl_list),
+        join_by(variabel)
+    ) |>
+    View()
 
-tbl_angka_desimal
+tbl_list_tidy    <- tbl_list |> bps_simdasi_list_tidy()
+tbl_list_glance  <- tbl_list |> bps_simdasi_list_glance()
+tbl_list_augment <- tbl_list |> bps_simdasi_list_augment()
 
-tbl_tgl_cut_off <- tbl_list |>
-    select(contains("tanggal_cut_off"))
-
-tbl_satuan <- tbl_list |>
-    select(contains("satuan"))
-
-
-names(tbl_kolom) |>
-    str_remove("nama_variabel.*") |>
-    str_remove("metadata.*") |>
-    str_remove("tipe") |>
-    str_remove("angka_desimal.*") |>
-    str_remove("satuan.*") |>
-    str_remove("tanggal_cut_off")
+tbl_list_augment |>
+    left_join(tbl_list_tidy, join_by(variabel))
 ```
+
 
 
 ## Sensus

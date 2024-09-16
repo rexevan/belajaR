@@ -1,0 +1,565 @@
+---
+title: "Membuat fungsi untuk menarik data SIMDASI via httr2"
+author: "Rex Evan"
+format: html
+---
+
+## README 
+
+Ini adalah dokumen untuk belajar menggunakan API BPS dengan menggunakan paket R `httr2` dan bukan `httr`.
+
+```{r}
+library(tidyverse)
+library(httr2)
+```
+
+## SIMDASI
+
+### List of 7 Digit MFD Code of Province
+
+```{r list-province}
+url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/26/"
+
+
+req <- request(url_awal)
+
+woah <- req |>
+    req_url_path_append("key/") |>
+    req_url_path_append(Sys.getenv("WebAPI_KEY")) |>
+    req_perform()
+
+item_list <- woah$body |>
+    rawToChar() |>
+    jsonlite::fromJSON()
+
+item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+item_list_tbl
+
+```
+
+## List of 7 Digit MFD Code of Regency
+
+```{r list-regency}
+url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/27/"
+parent <- "5300000" # kode Provinsi + 000
+key <- Sys.getenv("WebAPI_KEY")
+
+url_kedua <- glue::glue("{url_awal}parent/{parent}/key/{key}")
+
+req <- request(url_kedua)
+
+woah <- req |>
+    req_perform()
+
+item_list <- woah$body |>
+    rawToChar() |>
+    jsonlite::fromJSON()
+
+item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+item_list_tbl
+
+
+```
+
+## List of 7 Digit MFD Code of District
+
+
+```{r list-district}
+url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/28/"
+parent <- "5310000" # kode Kabupaten + 000
+key <- Sys.getenv("WebAPI_KEY")
+
+url_kedua <- glue::glue("{url_awal}parent/{parent}/key/{key}")
+
+req <- request(url_kedua)
+
+woah <- req |>
+    req_perform()
+
+item_list <- woah$body |>
+    rawToChar() |>
+    jsonlite::fromJSON()
+
+item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+item_list_tbl
+
+```
+
+```{r fungsi-wilayah}
+
+simdasi_wilayah <- function(level = NULL, kdprov = "00", kdkab = "00", key = Sys.getenv("WebAPI_KEY")) {
+    
+    if(is.null(level)) {
+        stop("level tidak boleh NULL, harus terisi 'prov', 'kab' atau 'kec'")
+    } 
+    
+    if(!is.character(level)) {
+        stop("class dari level yang diisi harus karakter. Level yang diisi sekarang memiliki class :")
+        class(level)
+    }
+    
+    if(level != "prov" & level != "kab" & level != "kec") {
+        stop("level harus terisi 'prov', 'kab' atau 'kec'")
+    } 
+    
+    # Provinsi
+    if(level == "prov") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/26/"
+        url_full <- glue::glue("{url_awal}key/{key}")
+    } 
+    
+    # Kabupaten
+    if(level == "kab") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/27/"
+        parent <- glue::glue("{kdprov}00000") # kode Provinsi + 000
+        url_full <- glue::glue("{url_awal}parent/{parent}/key/{key}")
+    } 
+    
+    # Kecamatan 
+    if(level == "kec") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/28/"
+        parent <- glue::glue("{kdprov}{kdkab}000") 
+        url_full <- glue::glue("{url_awal}parent/{parent}/key/{key}")
+    }
+    
+    key <- key
+    req <- request(url_full)
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    return(item_list_tbl)
+}
+
+
+simdasi_wilayah(level = "prov")
+simdasi_wilayah(level = "kab", kdprov = "53")
+simdasi_wilayah(level = "kec", kdprov = "53", kdkab = "10")
+```
+
+*Welp!*, Hal ini juga membuktikan bahwa tidak (atau belum) ada data wilayah desa dari Web API BPS untuk bagian SIMDASI. Jadi tidak mungkin bisa dapat data per Desa (untuk Publikasi Kecamatan Dalam Angka).
+
+## List of SIMDASI Subject
+
+Menampilkan nama bab-bab Kabupaten Dalam Angka.
+
+```{r}
+url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/22/"
+wilayah <- "5310000"
+key <- Sys.getenv("WebAPI_KEY")
+
+url_kedua <- glue::glue("{url_awal}wilayah/{wilayah}/key/{key}")
+
+req <- request(url_kedua)
+
+woah <- req |>
+    req_perform()
+
+item_list <- woah$body |>
+    rawToChar() |>
+    jsonlite::fromJSON()
+
+item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+item_list_tbl
+
+
+write_rds(item_list_tbl, "output/rds/simdasi/tbl_simdasi_bab.rds")
+```
+
+
+## SIMDASI Master Table
+
+Menampilkan nama tabel-tabel per bab untuk DDA.
+
+```{r}
+
+url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/34/"
+
+key <- Sys.getenv("WebAPI_KEY")
+
+url_kedua <- glue::glue("{url_awal}key/{key}")
+
+req <- request(url_kedua)
+
+woah <- req |>
+    req_perform()
+
+item_list <- woah$body |>
+    rawToChar() |>
+    jsonlite::fromJSON()
+
+item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+item_list_tbl
+
+#write_rds(item_list_tbl, "output/rds/simdasi/tbl_simdasi_tabel_master.rds")
+```
+
+
+## Detail of SIMDASI Master Table
+
+Menampilkan detil dari tabel-tabel DDA (tabel di atas )
+
+
+```{r fungsi-simdasi-master-detail}
+
+simdasi_master_detail <- function(id_tabel, key = Sys.getenv("WebAPI_KEY")) {
+    
+    url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/36/"
+    url_kedua <- glue::glue("{url_awal}id_tabel/{id_tabel}/key/{key}")
+    
+    key <- key
+    
+    req <- request(url_kedua)
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data |> tibble() |> slice(2)
+    
+    item_list_tbl
+}
+```
+
+```{r}
+simdasi_master_detail(id_tabel = item_list_tbl$id_tabel[3])
+
+
+item_list_tbl$mms_id[1]
+
+```
+
+
+## List of SIMDASI Table Based on Area
+
+```{r fungsi-tabel-menurut-wilayah}
+
+simdasi_tabel_master <- function(kdprov = "00", kdkab = "00", key = Sys.getenv("WebAPI_KEY")) {
+    
+    url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/23/"
+    wilayah <- glue::glue("{kdprov}{kdkab}000") 
+    url_full <- glue::glue("{url_awal}wilayah/{wilayah}/key/{key}")
+    
+    key <- key
+    req <- request(url_full)
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    return(item_list_tbl)
+}
+```
+
+
+```{r}
+simdasi_master_tabel(kdprov = "53")
+simdasi_master_tabel(kdprov = "53", kdkab = "10")
+```
+
+## List of SIMDASI Table Based on Area and Subject
+
+Menampilkan daftar tabel SIMDASI menurut wilayah dan bab.
+
+huh...
+
+Setelah pemeriksaan lebih lanjut, ternyata hasil dari request yang ini hanyalah perpanjangan dari yang sebelumnya, 
+Jadi pada dasarnya tidak perlu bikin fungsi untuk bagian ini.
+
+```{r}
+
+url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/24/"
+wilayah <- "5310000"
+mms_id <- "540"
+key <- Sys.getenv("WebAPI_KEY")
+
+url_kedua <- glue::glue("{url_awal}wilayah/{wilayah}/id_subjek/{mms_id}/key/{key}")
+
+req <- request(url_kedua)
+
+woah <- req |>
+    req_perform()
+
+item_list <- woah$body |>
+    rawToChar() |>
+    jsonlite::fromJSON()
+
+item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+item_list_tbl
+
+
+```
+
+```{r}
+simdasi_tabel_master(kdprov = "53", kdkab = "10") |>
+    filter(mms_id == "540")
+```
+
+
+## Detail of SIMDASI Table
+
+*Alright*, kita sudah sampai di subbagian terakhir untuk bagian SIMDASI.
+
+Ini adalah bagisn untuk menampilkan detil dari tabel simdasi. 
+
+
+```{r}
+tbl_5310 <- simdasi_tabel(kdprov = "53", kdkab = "10")
+
+tbl_5310$id_tabel[20]
+
+
+tbl_5310 |>
+    select(id_tabel, kode_tabel, tahun = ketersediaan_tahun) |> 
+    unnest(tahun) |> 
+    View()
+```
+
+
+
+```{r}
+
+simdasi_get <- function(kdprov, kdkab, tahun, id_tabel, key = Sys.getenv("WebAPI_KEY")) {
+    
+    url_awal <- "https://webapi.bps.go.
+    3id/v1/api/interoperabilitas/datasource/simdasi/id/25/"
+    wilayah <- glue::glue("{kdprov}{kdkab}000") 
+    url_kedua <- glue::glue("{url_awal}wilayah/{wilayah}/tahun/{tahun}/id_tabel/{id_tabel}/key/{key}")
+    
+    
+    req <- request(url_kedua)
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    item_list_tbl    
+
+}
+
+
+
+```
+
+```{r}
+simdasi_get(
+    kdprov = "53",
+    kdkab = "10",
+    tahun = 2018, 
+    id_tabel = tbl_5310$id_tabel[1]
+)
+```
+
+
+
+## Kesimpulan 
+
+*In conclusion*, setelah mencoba 1 per 1 WebAPI bagian SIMDASI, ada 3 fungsi yang bisa dibuat.
+
+1. `simdasi_get_area()`
+
+Untuk mengambil daftar wilayah (Kode Provinsi, Kabupaten, Kecamatan).
+
+2. `simdasi_get_table()`
+
+Untuk mengambil informasi mengenai tabel.
+
+3. `simdasi_get_data()`
+
+Untuk mengambil data SIMDASI.
+
+
+## Pipe-able 
+
+Sepertinya bukan ide yang buruk. Pada dasarnya 3 fungsi diatas akan dipakai dalam sebuah pipe-line.
+
+
+```{r pipe-able}
+
+library(tidyverse)
+library(httr2)
+
+simdasi_get_area <- function(level = NULL, kdprov = "00", kdkab = "00", key = Sys.getenv("WebAPI_KEY")) {
+    
+    if(is.null(level)) {
+        stop("level tidak boleh NULL, harus terisi 'prov', 'kab' atau 'kec'")
+    } 
+    
+    if(!is.character(level)) {
+        stop("class dari level yang diisi harus karakter. Level yang diisi sekarang memiliki class :")
+        class(level)
+    }
+    
+    if(level != "prov" & level != "kab" & level != "kec") {
+        stop("level harus terisi 'prov', 'kab' atau 'kec'")
+    } 
+    
+    # Provinsi
+    if(level == "prov") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/26/"
+        req <- request(url_awal) |>
+            req_url_path_append("key", key)
+    } 
+    
+    # Kabupaten
+    if(level == "kab") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/27/"
+        parent <- paste0(kdprov, "00000")
+        req <- request(url_awal) |>
+            req_url_path_append("parent", parent) |>
+            req_url_path_append("key", key)
+    }
+    
+    # Kecamatan 
+    if(level == "kec") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/28/"
+        parent <- paste0(kdprov, kdkab, "000")
+        req <- request(url_awal) |>
+            req_url_path_append("parent", parent) |>
+            req_url_path_append("key", key)
+    }
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    return(item_list_tbl)
+}
+
+
+
+simdasi_get_table <- function(kdprov = "00", kdkab = "00", key = Sys.getenv("WebAPI_KEY"), wilayah) {
+    
+    if(is.null(wilayah)) {
+        wilayah <- paste0(kdprov, kdkab, "000")
+    }
+    
+    if(!is.null(wilayah)) {
+        wilayah <- as.character(wilayah)
+    }
+    
+    url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/23/"
+    
+    req <- request(url_awal) |>
+        req_url_path_append("wilayah", wilayah) |>
+        req_url_path_append("key", key)    
+    
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    return(item_list_tbl)
+}
+
+
+
+simdasi_get_data <- function(kdprov, kdkab, tahun, id_tabel, key = Sys.getenv("WebAPI_KEY"), wilayah) {
+    
+    if(is.null(wilayah)) {
+        wilayah <- paste0(kdprov, kdkab, "000")
+    }
+    
+    if(!is.null(wilayah)) {
+        wilayah <- as.character(wilayah)
+    }
+    
+    url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/"
+
+    req <- request(url_awal) |>
+        req_url_path_append("wilayah", wilayah) |>
+        req_url_path_append("tahun", tahun) |>
+        req_url_path_append("id_tabel", id_tabel) |>
+        req_url_path_append("key", key)
+
+    woah <- req |>
+        req_perform()
+
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+    item_list_tbl
+
+}
+
+```
+
+```{r}
+
+tbl_5310 <- simdasi_get_area(level = "kab", kdprov = 53, kdkab = 10) |>
+    filter(kode == "5310000") |> 
+    mutate(tabel = map(.x = kode, .f = ~ simdasi_get_table(wilayah = .x))) |> 
+    unnest(tabel) |>
+    rename(tahun = ketersediaan_tahun) |> 
+    unnest(tahun)
+
+tbl_5310
+
+tbl_5310_data <- tbl_5310 |>
+    select(wilayah = kode, id_tabel, tahun = ketersediaan_tahun, judul, kode_tabel, bab) |>
+    unnest(tahun) |>
+    filter(bab == "Pemerintahan", tahun >= 2020) |>
+    mutate(data = 
+               pmap(
+                   .l = list(wilayah, id_tabel, tahun), 
+                   .f = ~ simdasi_get_data(wilayah = wilayah, id_tabel = id_tabel, tahun = tahun)
+               )
+    )
+
+tbl_5310
+
+
+tbl_5310_data |> 
+    mutate(save_judul = paste0("output/rds/simdasi/", kode_tabel, "-", tahun, ".rds")) %$%
+    walk2(.x = data, .y =  save_judul, .f = ~ write_rds(x = .x, file = .y))
+```
+
+
+## Penutup 
+
+*So that's it*. Kita sudah berhasil membuat fungsi untuk mengambil data DDA dari SIMDASI dengna menggunakan WebAPI BPS.
+Semoga script ini bisa berguna dalam penyusunan DDA yang akan datang.
+
+
+
+
+
+

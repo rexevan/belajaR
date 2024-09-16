@@ -1,0 +1,345 @@
+---
+title: "Menekstak Data SIMDASI"
+author: "rexevan"
+format: html
+---
+
+## Pendahuluan 
+
+Melanjutkan dari sebelumnya, kita punya fungsi sebagai berikut. 
+
+1. `simdasi_get_area()`
+
+Untuk mengambil daftar wilayah (Kode Provinsi, Kabupaten, Kecamatan).
+
+2. `simdasi_get_table()`
+
+Untuk mengambil informasi mengenai tabel.
+
+3. `simdasi_get_data()`
+
+Untuk mengambil data SIMDASI.
+
+```{r custom-functions}
+
+library(tidyverse)
+library(httr2)
+
+simdasi_get_area <- function(level = NULL, kdprov = "00", kdkab = "00", key = Sys.getenv("WebAPI_KEY")) {
+    
+    if(is.null(level)) {
+        stop("level tidak boleh NULL, harus terisi 'prov', 'kab' atau 'kec'")
+    } 
+    
+    if(!is.character(level)) {
+        stop("class dari level yang diisi harus karakter. Level yang diisi sekarang memiliki class :")
+        class(level)
+    }
+    
+    if(level != "prov" & level != "kab" & level != "kec") {
+        stop("level harus terisi 'prov', 'kab' atau 'kec'")
+    } 
+    
+    # Provinsi
+    if(level == "prov") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/26/"
+        req <- request(url_awal) |>
+            req_url_path_append("key", key)
+    } 
+    
+    # Kabupaten
+    if(level == "kab") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/27/"
+        parent <- paste0(kdprov, "00000")
+        req <- request(url_awal) |>
+            req_url_path_append("parent", parent) |>
+            req_url_path_append("key", key)
+    }
+    
+    # Kecamatan 
+    if(level == "kec") {
+        url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/28/"
+        parent <- paste0(kdprov, kdkab, "000")
+        req <- request(url_awal) |>
+            req_url_path_append("parent", parent) |>
+            req_url_path_append("key", key)
+    }
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    return(item_list_tbl)
+}
+
+
+
+simdasi_get_table <- function(kdprov = "00", kdkab = "00", key = Sys.getenv("WebAPI_KEY"), wilayah) {
+    
+    if(is.null(wilayah)) {
+        wilayah <- paste0(kdprov, kdkab, "000")
+    }
+    
+    if(!is.null(wilayah)) {
+        wilayah <- as.character(wilayah)
+    }
+    
+    url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/23/"
+    
+    req <- request(url_awal) |>
+        req_url_path_append("wilayah", wilayah) |>
+        req_url_path_append("key", key)    
+    
+    
+    woah <- req |>
+        req_perform()
+    
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+    
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+    
+    return(item_list_tbl)
+}
+
+
+
+simdasi_get_data <- function(kdprov, kdkab, tahun, id_tabel, key = Sys.getenv("WebAPI_KEY"), wilayah) {
+    
+    if(is.null(wilayah)) {
+        wilayah <- paste0(kdprov, kdkab, "000")
+    }
+    
+    if(!is.null(wilayah)) {
+        wilayah <- as.character(wilayah)
+    }
+    
+    url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/"
+
+    req <- request(url_awal) |>
+        req_url_path_append("wilayah", wilayah) |>
+        req_url_path_append("tahun", tahun) |>
+        req_url_path_append("id_tabel", id_tabel) |>
+        req_url_path_append("key", key)
+
+    woah <- req |>
+        req_perform()
+
+    item_list <- woah$body |>
+        rawToChar() |>
+        jsonlite::fromJSON()
+
+    item_list_tbl <- item_list$data$data[[2]] |> tibble()
+
+    item_list_tbl
+
+}
+
+```
+
+*basicly*, kita tinggal downoad masing-masin tabel.
+
+```{r download-semua-tabel}
+
+tbl_5310 <- simdasi_get_area(level = "kab", kdprov = 53, kdkab = 10) |>
+    filter(kode == "5310000") |> 
+    mutate(tabel = map(.x = kode, .f = ~ simdasi_get_table(wilayah = .x))) |> 
+    unnest(tabel) |>
+    rename(tahun = ketersediaan_tahun) |> 
+    unnest(tahun)
+
+tbl_5310
+
+tbl_5310_data <- tbl_5310 |>
+    mutate(data = 
+               pmap(
+                   .l = list(kode, id_tabel, tahun), 
+                   .f = ~ simdasi_get_data(wilayah = kode, id_tabel = id_tabel, tahun = tahun),
+                   .progress = TRUE
+               )
+    )
+
+tbl_5310_data
+
+# library(magrittr)
+# tbl_5310_data |> 
+#     mutate(save_judul = paste0("output/rds/simdasi/", kode_tabel, "-", tahun, ".rds")) %$%
+#     walk2(.x = data, .y =  save_judul, .f = ~ write_rds(x = .x, file = .y))
+```
+
+Welp, Karena terjadi error di tengah jalan, maka kita akan ubah sedikit scriptnya untuk mwndownload per bab saja. 
+
+
+```{r download-per-bab}
+
+
+txt_5310_bab <- (tbl_5310$bab) |> unique()
+
+# berhasil : 1, 2, 5
+# Gagal : 3, 4
+
+
+tbl_5310_data <- tbl_5310 |>
+    filter(bab == txt_5310_bab[5]) |>
+    mutate(data = 
+               pmap(
+                   .l = list(kode, id_tabel, tahun), 
+                   .f = ~ simdasi_get_data(wilayah = kode, id_tabel = id_tabel, tahun = tahun),
+                   .progress = TRUE
+               )
+    )
+
+tbl_5310_data
+
+# library(magrittr)
+# tbl_5310_data |> 
+#     mutate(save_judul = paste0("output/rds/simdasi/", kode_tabel, "-", tahun, ".rds")) %$%
+#     walk2(.x = data, .y =  save_judul, .f = ~ write_rds(x = .x, file = .y))
+
+
+```
+
+Okay, yang berhasil antara lain Pemerintahan, Penduduk dan Ketenagakerjaan, dan Sistem Neraca Nasional/Regional.
+Sementara itu, yang gagal adalah Sosial dan Kesejahteraan Rakyat, dan Pertanian, Kehutanan, Peternakan, dan Perikanan.
+
+## Sosial dan Kesejahteraan Rakyat 
+
+```{r}
+txt_5310_bab[3]
+
+# Coba download data tahun terakhir
+
+# mainkan di `filter(tahun == max(tahun)-1)`
+
+tbl_5310_data <- tbl_5310 |> 
+    filter(bab == txt_5310_bab[3]) |>
+    group_by(kode_tabel) |>
+    filter(tahun == max(tahun)-4) |>
+    mutate(data = 
+               pmap(
+                   .l = list(kode, id_tabel, tahun), 
+                   .f = ~ simdasi_get_data(wilayah = kode, id_tabel = id_tabel, tahun = tahun),
+                   .progress = TRUE
+               )
+    )
+
+
+# library(magrittr)
+# tbl_5310_data |> 
+#     mutate(save_judul = paste0("output/rds/simdasi/", kode_tabel, "-", tahun, ".rds")) %$%
+#     walk2(.x = data, .y =  save_judul, .f = ~ write_rds(x = .x, file = .y))
+
+
+```
+
+Okay, tidak ada error ketika ekstrak data sampai 3 tahun terakhir. 
+
+## Pertanian, Kehutanan, Peternakan, dan Perikanan
+
+```{r}
+txt_5310_bab[4]
+
+# Coba download data tahun terakhir
+
+# mainkan di `filter(tahun == max(tahun)-1)`
+
+tbl_5310_data <- tbl_5310 |> 
+    filter(bab == txt_5310_bab[4]) |>
+    group_by(kode_tabel) |>
+    filter(tahun == max(tahun)-3) |>
+    mutate(data = 
+               pmap(
+                   .l = list(kode, id_tabel, tahun), 
+                   .f = ~ simdasi_get_data(wilayah = kode, id_tabel = id_tabel, tahun = tahun),
+                   .progress = TRUE
+               )
+    )
+
+
+# library(magrittr)
+# tbl_5310_data |> 
+#     mutate(save_judul = paste0("output/rds/simdasi/", kode_tabel, "-", tahun, ".rds")) %$%
+#     walk2(.x = data, .y =  save_judul, .f = ~ write_rds(x = .x, file = .y))
+
+
+```
+
+Ini juga tidak ada error sampai download data 3 tahun terakhir.
+
+Jadi kemungkinan, error saat di run semua adalah error yang berasal dari tahun yang lebih dulu lagi. 
+Error dari tahun yang datanya tidak di publish di DDA tahun ini juga.
+
+
+*bukankah lebih baik jika kita hanya mendownload data dari 2 tahun terakhir?*
+
+*let me explain*. 
+
+
+
+## 4 Tahun terakhir 
+
+Biasanya data yang di publish di DDA adalah data dari 4 tahun terakhir.
+Sebagai Contoh DDA 2024 berisikan data dari tahun 2020 - 2023.
+Oleh karena itu, kita hanya perlu mengunduh data dari 4 tahun terakhir.
+
+```{r dont-repeat-yourself}
+unduh_tabel <- function(df) {
+    y <- df |>
+    mutate(data = 
+               pmap(
+                   .l = list(kode, id_tabel, tahun), 
+                   .f = ~ simdasi_get_data(wilayah = kode, id_tabel = id_tabel, tahun = tahun),
+                   .progress = TRUE
+               )
+    )
+    
+    return(y)
+}
+```
+
+
+```{r download-4-tahun-terakhir}
+
+int_tahun_berjalan <- 2024
+int_last_year = int_tahun_berjalan - 1
+
+tbl_5310_last_year <- 
+    tbl_5310 |> 
+    filter(tahun == int_last_year) |>
+    unduh_tabel()
+
+tbl_5310_last_year_minus_1 <- 
+    tbl_5310 |> 
+    filter(tahun == int_last_year - 1) |>
+    unduh_tabel()
+
+tbl_5310_last_year_minus_2 <- 
+tbl_5310 |> 
+    filter(tahun == int_last_year - 2) |>
+    unduh_tabel()
+
+tbl_5310_last_year_minus_3 <- 
+tbl_5310 |> 
+    filter(tahun == int_last_year - 3) |>
+    unduh_tabel()
+
+
+tbl_5310_last_4_years <- 
+    tbl_5310_last_year_minus_3 |>
+    bind_rows(tbl_5310_last_year_minus_2) |>
+    bind_rows(tbl_5310_last_year_minus_1) |>
+    bind_rows(tbl_5310_last_year)
+
+
+
+# write_rds(tbl_5310_last_4_years, "output/rds/simdasi/2nd/tbl_DDA_4_tahun_terakhir.rds")
+
+```
+
+Tidak bisa jika tahunnya `filter(tahun == 2024-4)` supaya kita download dari tahun 2020 ke atas. 

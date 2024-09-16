@@ -1,0 +1,85 @@
+---
+title: "Wrangling Data Simdasi"
+author: "rexevan"
+format: html
+---
+
+## Pendahuluan 
+
+Melanjutkan sebelumnya, kita sudah simpan data-data tabel simdasi untuk 4 tahun terakhir.
+
+```{r}
+library(tidyverse)
+
+tbl_dda <- read_rds("output/rds/simdasi/2nd/tbl_DDA_4_tahun_terakhir.rds") |>
+    arrange(kode_tabel, tahun)
+
+txt_kode_tabel <- tbl_dda$kode_tabel |> unique()
+```
+
+```{r dont-repeat-yourself}
+
+unnest_per_kec <- function(df, txt) {
+    
+    y <- df |> 
+    filter(kode_tabel == txt) |>
+    select(kode_tabel, tahun, data) |>
+    unnest(data) |>
+    unnest(variables) |>
+    unnest(-c(kode_tabel:kode_wilayah), names_sep = ".")
+
+    return(y)
+}
+
+
+
+```
+
+
+## 1.1.1 
+
+```{r}
+
+
+tbl_dda %>%
+    unnest_per_kec(txt == txt_kode_tabel[1])
+        
+
+unnest_per_kec(df = tbl_dda, txt = txt_kode_tabel[4])
+
+  tbl_dda |> 
+    filter(kode_tabel == "12.1") |>
+    select(kode_tabel, tahun, data) |>
+    unnest(data) |>
+    unnest(variables) |>
+    unnest(-c(kode_tabel:kode_wilayah), names_sep = ".")
+
+
+
+  tbl_data_unnest |> 
+    select(kode_tabel, tahun, kynntipynd) |>
+    flatten()
+
+```
+
+
+
+
+
+## butuh info detil 
+
+Butuh info nama kolom.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

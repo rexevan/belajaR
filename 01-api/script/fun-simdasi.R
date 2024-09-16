@@ -1,9 +1,3 @@
-
-library(tidyverse)
-source("script/00-set-key.R")
-bps_set_key()
-
-
 ## Daftar Tabel DDA -------------------------
 
 bps_simdasi_dda <- function(WebAPI_KEY = NULL) {
@@ -33,11 +27,12 @@ bps_simdasi_dda <- function(WebAPI_KEY = NULL) {
 
 ## Daftar Tabel KCDA -------------------------
 
+## Kode wilayah = 7 digit sampai level desa/kelurahan
 
-bps_simdasi_kcda <- function(kode_satker = NULL, WebAPI_KEY = NULL) {
+bps_simdasi_kcda <- function(kode_wilayah, WebAPI_KEY = NULL) {
     
-    if(is.null(kode_satker)){
-        stop("kode_satker tidak boleh NULL")
+    if(is.null(kode_wilayah)){
+        stop("kode_wilayah tidak boleh NULL")
     }
     
     if(is.null(WebAPI_KEY)) {
@@ -46,7 +41,7 @@ bps_simdasi_kcda <- function(kode_satker = NULL, WebAPI_KEY = NULL) {
     WebAPI_KEY <- WebAPI_KEY
     
     url <- glue::glue(
-        "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/23/wilayah/{kode_satker}000/key/{WebAPI_KEY}"    
+        "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/23/wilayah/{kode_wilayah}/key/{WebAPI_KEY}"    
         )
     
     get_url <- httr::GET(url)
@@ -67,10 +62,10 @@ bps_simdasi_kcda <- function(kode_satker = NULL, WebAPI_KEY = NULL) {
 
 ## Untuk mengakses tabel SIMDASI, kita butuh id_tabel, dan tahun 
 
-bps_simdasi_tabel <- function(kode_satker, tahun, id_tabel, WebAPI_KEY = NULL) {
+bps_simdasi_tabel <- function(kode_wilayah, tahun, id_tabel, WebAPI_KEY = NULL) {
     
-    if(is.null(kode_satker)){
-        stop("kode_satker tidak boleh NULL")
+    if(is.null(kode_wilayah)){
+        stop("kode_wilayah tidak boleh NULL")
     }
     
     if(is.null(tahun)){
@@ -88,7 +83,7 @@ bps_simdasi_tabel <- function(kode_satker, tahun, id_tabel, WebAPI_KEY = NULL) {
     
     url_awal <- "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/"
     
-    url <- glue::glue("{url_awal}wilayah/{kode_satker}000/tahun/{tahun}/id_tabel/{id_tabel}/key/{WebAPI_KEY}/")
+    url <- glue::glue("{url_awal}wilayah/{kode_wilayah}/tahun/{tahun}/id_tabel/{id_tabel}/key/{WebAPI_KEY}/")
     
     get_url <- httr::GET(url)
     
@@ -102,24 +97,21 @@ bps_simdasi_tabel <- function(kode_satker, tahun, id_tabel, WebAPI_KEY = NULL) {
     return(list_data)
 }
 
+## Data Transformation ----------------------------------------
 
 
-tbl_list <- bps_simdasi_tabel(kode_satker = 5310, tahun = 2023, id_tabel = "UFpWMmJZOVZlZTJnc1pXaHhDV1hPQT09") |>
-    slice(2) |>
-    tibble()
-
-## Data Transformation -----------------------------------------
-tbl_list
-
-tbl_list |> select(contains("keterangan_data"))
-tbl_list |> select(contains("variabel"))
-tbl_list |> select(contains("kolom"))
-
-tbl_list |> 
-    select(data) |> 
-    unnest(cols = data)
 
 
-tbl_simdasi <- get_data$data$data[[2]] |> tibble()
 
-tbl_simdasi
+
+
+
+
+
+
+
+
+
+
+
+
