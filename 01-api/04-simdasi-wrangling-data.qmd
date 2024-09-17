@@ -6,7 +6,7 @@ format: html
 
 ## Pendahuluan 
 
-Melanjutkan sebelumnya, kita sudah simpan data-data tabel simdasi untuk 4 tahun terakhir.
+Melanjutkan sebelumnya, kita sudah simpan data-data tabel simdasi untuk 1 tahun terakhir.
 
 ```{r}
 library(tidyverse)
@@ -35,50 +35,7 @@ unnest_per_kec <- function(df, txt) {
 
 ```
 
-
-## 1.1.1 
-
-```{r}
-tbl_save <- tibble(kode_tabel = txt_kode_tabel) |>
-    mutate(data_tabel = map(.x = kode_tabel, .f = ~ unnest_per_kec(tbl_dda, .x)))
-
-
-tbl_save
-
-ambil_variabel <- function(df) {
-    
-    y <- df |> 
-        select(ends_with(".value")) |>
-        names() |>
-        str_flatten_comma() |>
-        str_remove_all("\\.value")
-    
-    return(y)
-}
-
-
-tbl_save |>
-    mutate(
-        kolom_variabel = map_chr(.x = data_tabel, .f = ~ ambil_variabel(.x))
-    ) |>
-    View()
-
-tbl_save
-    mutate(nama_kolom = map(data_tabel, names) |> map_chr(str_flatten_comma) |> str_extract_all("*.value"))
-        
-```
-
-
-
-
-
-## butuh info detil 
-
-Butuh info nama kolom.
-
-
-
-
+*you know what? I'll stop here for now. I'll continue this later.* 
 
 
 
