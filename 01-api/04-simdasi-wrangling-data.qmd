@@ -44,5 +44,3 @@ unnest_per_kec <- function(df, txt) {
 
 
 
-
-

@@ -1,0 +1,17 @@
+{
+  "hash": "37d122f7686507e8bffcb513bf83e69d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Perkembangan Indeks Harga Konsumen Kota Maumere\"\nformat: \n    dashboard:\n        orientation: rows\n        nav-buttons: github\n---\n\n\n# Infografik\n\n## Rows\n\n### m-to-m\n\n\n::: {.cell title='<i>Month-to-Month (M-to-M)</i>'}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"DEFLASI 0,28%\"\n```\n\n\n:::\n:::\n\n\n### year-to-date\n\n\n::: {.cell title='<i>Year-to-Date (Y-to-D)</i>'}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"DEFLASI 0,30%\"\n```\n\n\n:::\n:::\n\n\n### year-on-year\n\n\n::: {.cell title='<i>Year-on-Year (Y-on-Y)</i>'}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"INFLASI 1,12%\"\n```\n\n\n:::\n:::\n\n\n## Andil Inflasi \n\n\n::: {.cell title='Andil Inflasi'}\n::: {.cell-output-display}\n![](06-quarto-dashboard_files/figure-html/unnamed-chunk-4-1.png){width=768}\n:::\n:::\n\n\n\n## Tingkat Inflasi Y-on-Y \n\n\n::: {.cell title='Tingkat Inflasi Y-on-Y'}\n::: {.cell-output-display}\n![](06-quarto-dashboard_files/figure-html/unnamed-chunk-5-1.png){width=768}\n:::\n:::\n\n\n\n## Inflasi Y-on-Y (map)\n\n\n::: {.cell title='Inflasi Y-on-Y (map)'}\n::: {.cell-output-display}\n![](06-quarto-dashboard_files/figure-html/unnamed-chunk-6-1.png){width=768}\n:::\n:::\n\n\n\n# Data \n\n\n# Metadata\n\n\n\n\n",
+    "supporting": [
+      "06-quarto-dashboard_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

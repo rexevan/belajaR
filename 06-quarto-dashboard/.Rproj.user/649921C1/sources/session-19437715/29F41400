@@ -1,0 +1,32 @@
+{
+    "id": "29F41400",
+    "path": "E:/Game/R/belajaR/06-quarto-dashboard/dashboard-inflasi.qmd",
+    "project_path": "dashboard-inflasi.qmd",
+    "type": "quarto_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1726618577226.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "cursorPosition": "26,16",
+        "scrollLine": "13",
+        "rmdVisualModeLocation": "2:400",
+        "rmdVisualCollapsedChunks": "",
+        "docOutlineSize": "139"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1726640949,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1726640949546,
+    "read_only": false,
+    "read_only_alternatives": []
+}

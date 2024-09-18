@@ -1,0 +1,66 @@
+---
+title: "Perkembangan Indeks Harga Konsumen Kota Maumere"
+format: 
+    dashboard:
+        orientation: rows
+        nav-buttons: github
+---
+
+# Infografik
+
+## Rows
+
+### m-to-m
+
+```{r}
+#| title: <i>Month-to-Month (M-to-M)</i>
+paste0("DEFLASI 0,28%")
+```
+
+### year-to-date
+
+```{r}
+#| title: <i>Year-to-Date (Y-to-D)</i>
+paste0("DEFLASI 0,30%")
+```
+
+### year-on-year
+
+```{r}
+#| title: <i>Year-on-Year (Y-on-Y)</i>
+
+paste0("INFLASI 1,12%")
+```
+
+## Andil Inflasi 
+
+```{r}
+#| title: Andil Inflasi
+plot(cars)
+```
+
+
+## Tingkat Inflasi Y-on-Y 
+
+```{r}
+#| title: Tingkat Inflasi Y-on-Y 
+plot(cars)
+```
+
+
+## Inflasi Y-on-Y (map)
+
+```{r}
+#| title: Inflasi Y-on-Y (map)
+plot(cars)
+```
+
+
+# Data 
+
+
+# Metadata
+
+
+
+

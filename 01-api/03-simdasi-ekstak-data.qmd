@@ -146,7 +146,7 @@ simdasi_get_data <- function(kdprov, kdkab, tahun, id_tabel, key = Sys.getenv("W
 ## 1 Tahun terakhir 
 
 Welp, sebelah mencoba berjam-jam selama 2 hari ini. Mending kita kerja yang mudah terlebih dahulu.
-Mari kita unduh data untuk tahun te
+Mari kita unduh data untuk tahun terakhir/terbaru.
 
 ```{r download-semua-tabel}
 
