@@ -1,0 +1,5 @@
+ppk.nama <- "Nama PPK"
+ppk.nip <- "NIP PPK"
+ppk.jabatan <- "Pejabat Pembuat Komitmen"
+ppk.unit_kerja <- "Nama Unit Kerja"
+ppk_unit_kerja_alamat <- "Alamat Unit Kerja"

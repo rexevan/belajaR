@@ -1,3 +1,5 @@
+library(tidyverse)
+
 #https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
 numbers2words <- function(x){
     ## Function by John Fox found here: 
@@ -61,20 +63,28 @@ terbilang <- function(x) {
   return(y)
 }
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+terbilang_uang <- function(x) {
+    y <- x |> terbilang() |> paste0(" rupiah")
+    return(y)
+}
+
+terbilang_tanggal <- function(txt_dmy) {
+    
+    if(!is_character(txt_dmy)) {
+        stop("txt_dmy harus minimal karakter")
+    }
+    
+    x <- txt_dmy |> as_date()
+    
+    txt_hari    <- x |> wday(label = TRUE, abbr = FALSE, locale = "IND") |> str_to_lower()
+    txt_tanggal <- x |> day() |> terbilang()
+    txt_tahun   <- x |> year() |> terbilang()
+    txt_bulan   <- x |> month(label = TRUE, abbr = FALSE, locale = "IND") |> str_to_lower()
+    
+    y <- str_glue("{txt_hari}, tanggal {txt_tanggal}, bulan {txt_bulan}, tahun {txt_tahun}")
+    
+    return(y)
+}
   

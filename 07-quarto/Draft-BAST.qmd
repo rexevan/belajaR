@@ -1,0 +1,68 @@
+---
+title: BERITA ACARA SERAH TERIMA HASIL PEKERJAAN PETUGAS PENGOLAHAN SURVEI DAN SENSUS TAHUN 2024
+format: 
+  pdf:
+    documentclass: article
+    pagestyle: empty
+    papersize: a4
+    geometry: 
+      - top=10mm
+      - bottom=20mm
+      - left=20mm
+      - right=20mm
+editor: source
+---
+
+\begin{center}
+NOMOR: `bast.nomor`
+\end{center}
+
+```{r pendahuluan}
+#| include: FALSE
+
+library(tidyverse)
+source("script/terbilang.R")
+source("script/identitas-ppk.R")
+bast_tanggal <- Sys.Date()  |> as.character() |> terbilang_tanggal()
+```
+
+
+Pada hari ini `r bast_tanggal`, bertempat di Maumere, kami yang bertanda tangan di bawah ini:
+
+- Nama 	:  `r ppk.nama`
+- NIP 	:  `r ppk.nip`
+- Jabatan 	:  `r ppk.jabatan`
+- Unit Kerja 	:  `r ppk.unit_kerja` 
+- Alamat Unit Kerja 	:  `r ppk_unit_kerja_alamat`
+
+bertindak untuk dan atas nama BPS Kabupaten Sikka, selanjutnya disebut sebagai PIHAK PERTAMA.
+
+- Nama 	: `petugas.nama`
+- NIK	: `petugas.nik`
+- Alamat	: `petugas.alamat`
+
+bertindak untuk dan atas namanya sendiri, selanjutnya disebut sebagai PIHAK KEDUA.
+
+Dengan ini menyatakan:  
+
+1.	PIHAK KEDUA telah melaksanakan pekerjaan Pengolahan Survei dan Sensus berdasarkan Surat Perjanjian Kerja PENGOLAHAN SURVEI DAN SENSUS pada Badan Pusat Statistik Kabupaten Sikka Nomor: `spk.nomor`.
+
+2.	PIHAK KEDUA telah menyelesaikan pekerjaan Pengolahan Survei dan Sensus berdasarkan hasil pemeriksaan dan evaluasi pekerjaan sebagaimana tercantum dalam lampiran. 
+
+3.	Berdasarkan angka 2 tersebut di atas, PIHAK KEDUA menyerahkan hasil pekerjaan Pengolahan Survei dan Sensus kepada PIHAK PERTAMA, dan PIHAK PERTAMA menerima hasil pekerjaan tersebut yang telah sesuai dengan seharusnya;
+
+4.	Hasil pekerjaan Pengolahan Survei dan Sensus sebagaimana dimaksud dalam angka 3 di atas, berupa dokumen yang sudah dientri sejumlah `long_description`.
+
+Demikian Berita Acara ini dibuat dengan sebenarnya dalam rangkap 2 (dua) dan menjadi sah berlaku setelah ditandatangani oleh KEDUA BELAH PIHAK.      
+
+\begin{center}
+\begin{tabular}{cp{5cm}c}
+PIHAK PERTAMA & & PIHAK KEDUA \\
+  &  &  \\
+  &  &  \\
+  &  &  \\
+  &  &  \\
+`petugas.nama`   & & `r ppk.nama`    \\
+\end{tabular}
+\end{center}
+
