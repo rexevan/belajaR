@@ -15,8 +15,11 @@ Repo untuk simpan script R yang dipakai dalam belajar
 ## Tools
 
 -   program : [R](https://www.r-project.org/), [RStudio Desktop](https://posit.co/download/rstudio-desktop/)
--   font : [IBM Plex](https://github.com/IBM/plex), [Iosevka](https://github.com/be5invis/Iosevka)
--   theme : [rscentheme](https://github.com/florale/rscentheme), [rstudio-themes](https://github.com/max-alletsee/rstudio-themes)
+
+# Styling 
+-   font : [IBM Plex Mono](https://github.com/IBM/plex), [Iosevka](https://github.com/be5invis/Iosevka), [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+-   theme : [rstudio-themes](https://github.com/max-alletsee/rstudio-themes). favorit : `a11y-light` dan `a11y-dark`
+
 
 
 

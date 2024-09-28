@@ -1,4 +1,22 @@
-
+bps_dt_url2list <- function(Endpoint_WebAPI, WebAPI_KEY = NULL) {
+    
+    if(is.null(WebAPI_KEY)) {
+        WebAPI_KEY = Sys.getenv("WebAPI_KEY")
+    } 
+    
+    WebAPI_KEY <- WebAPI_KEY
+    
+    url <- sub(x = Endpoint_WebAPI, pattern = "WebAPI_KEY", WebAPI_KEY)
+    
+    get_url <- httr::GET(url)
+    
+    get_data <-
+        get_url$content |>
+        rawToChar() |> 
+        jsonlite::fromJSON(flatten = TRUE)
+    
+    get_data
+}
 
 bps_dt_list2tbl <- function(data = list_data) {
     pacman::p_load(tidyverse)
@@ -57,28 +75,6 @@ bps_dt_list2tbl <- function(data = list_data) {
     
     return(tbl_konten_arranged)
     }
-
-
-bps_dt_url2list <- function(Endpoint_WebAPI, WebAPI_KEY = NULL) {
-
-    if(is.null(WebAPI_KEY)) {
-        WebAPI_KEY = Sys.getenv("WebAPI_KEY")
-    } 
-    
-    WebAPI_KEY <- WebAPI_KEY
-    
-    url <- sub(x = Endpoint_WebAPI, pattern = "WebAPI_KEY", WebAPI_KEY)
-    
-    get_url <- httr::GET(url)
-    
-    get_data <-
-        get_url$content |>
-        rawToChar() |> 
-        jsonlite::fromJSON(flatten = TRUE)
-    
-    get_data
-}
-
 
 bps_dt_get <- function(Endpoint_WebAPI, WebAPI_KEY = NULL) {
     

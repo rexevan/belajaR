@@ -20,22 +20,31 @@ Hal pertama yang perlu di lakukan adalah
 
 ```{r}
 source("script/00-set-key.R")
+
+Sys.getenv("WebAPI_KEY")
 bps_set_key()
 ```
 
 -   *Paste*
 
-## Tabel Dinamis
+## Tabel Dinamis (`bps_dt_`)
 
 Khusus fungsi R untuk mendapatkan tabel dinamis, fungsi-fungsi ini dibuat **sebelum** saya menemukan dengan paket `bpsr`. Untuk pencarian langsung dari R, lebih baik pakai paket `bpsr`.
 
 Fungsi ini dipakai ketika kita ke situs web BPS lalu secara manual pilih **JSON** di tabel dinamis.
 
 ```{r}
-source("script/03-bikin-fungsi.R")
+source("script/fun-dynamic-table.R")
 
-link <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5310/var/100/key/WebAPI_KEY"
-bps_dt_get(Endpoint_WebAPI = link)
+link <- "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/5300/var/1674/key/WebAPI_KEY"
+bps_dt_get(Endpoint_WebAPI = link) |>
+    #filter(vervar_label == "Sikka") |>
+    #select(isi_konten, ends_with("_label")) |>
+    mutate(turvar_label = turvar_label |> str_squish()) |>
+    arrange(tahun_val, vervar_val) |>
+    select(isi_konten, vervar_label, turvar_label, tahun_label) |>
+    pivot_wider(names_from = turvar_label,  values_from = isi_konten) |>
+    filter(tahun_label == "2023")
 ```
 
 Oke, sepertinya berhasil untuk ambil 1 jenis tabel. dsa Sekarang mari coba untuk beberapa tabel. Coba ambil angka inflasi kota-kota se Indonesia berdasarkan sub kelompok, mulai dari [sub kelompok 1](https://www.bps.go.id/id/statistics-table/2/MjI1MCMy/inflasi-tahunan--y-on-y---2022-100--menurut-kelompok-dan-sub-kelompok-01-makanan--minuman-dan-tembakau.html) s.d. [sub kelompok 11](https://www.bps.go.id/id/statistics-table/2/MjI2MCMy/inflasi-tahunan--y-on-y---2022-100--menurut-kelompok-dan-sub-kelompok-11-perawatan-pribadi-dan-jasa-lainnya.html)

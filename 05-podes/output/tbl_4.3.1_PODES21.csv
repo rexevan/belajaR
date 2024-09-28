@@ -1,0 +1,49 @@
+wil_code_kec,r507a,jml_desa,r507a_ket
+T010,07,6,Mata air
+T010,06,1,Sumur
+T010,04,1,Ledeng tanpa meteran
+T011,07,9,Mata air
+T011,04,1,Ledeng tanpa meteran
+T012,07,8,Mata air
+T020,05,1,Sumur bor atau pompa
+T020,07,1,Mata air
+T020,03,4,Ledeng dengan meteran (PAM/PDAM)
+T020,04,2,Ledeng tanpa meteran
+T020,09,1,Air hujan
+T030,09,3,Air hujan
+T030,03,3,Ledeng dengan meteran (PAM/PDAM)
+T031,07,7,Mata air
+T032,07,4,Mata air
+T040,06,1,Sumur
+T040,03,2,Ledeng dengan meteran (PAM/PDAM)
+T040,07,8,Mata air
+T040,05,1,Sumur bor atau pompa
+T041,07,3,Mata air
+T041,05,2,Sumur bor atau pompa
+T041,06,1,Sumur
+T041,04,3,Ledeng tanpa meteran
+T042,07,6,Mata air
+T050,09,2,Air hujan
+T050,05,2,Sumur bor atau pompa
+T050,06,2,Sumur
+T050,03,2,Ledeng dengan meteran (PAM/PDAM)
+T051,09,6,Air hujan
+T051,07,1,Mata air
+T052,05,8,Sumur bor atau pompa
+T052,03,1,Ledeng dengan meteran (PAM/PDAM)
+T061,09,8,Air hujan
+T062,03,6,Ledeng dengan meteran (PAM/PDAM)
+T063,03,2,Ledeng dengan meteran (PAM/PDAM)
+T063,10,3,Lainnya
+T070,03,6,Ledeng dengan meteran (PAM/PDAM)
+T070,07,6,Mata air
+T071,05,2,Sumur bor atau pompa
+T071,07,3,Mata air
+T080,02,5,Air isi ulang
+T080,06,2,Sumur
+T081,02,3,Air isi ulang
+T081,07,1,Mata air
+T082,02,5,Air isi ulang
+T082,03,2,Ledeng dengan meteran (PAM/PDAM)
+T082,07,2,Mata air
+T082,09,1,Air hujan
