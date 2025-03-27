@@ -1,0 +1,153 @@
+% !TEX program = xelatex
+%-------------------------------------
+% Resum in LaTeX (XeLaTeX)
+% Author:  HF Yuan
+% Project: https://github.com/xyz-yuanhf/yuan-resume
+% Base on: https://github.com/mattyHerzig/mattys_resume
+%          http://www.jianxu.net/en/
+% License: MIT
+%------------------------------------
+
+\documentclass[a4paper, 10pt]{article}
+\usepackage{myresume}  % Style package
+\newcommand{\mycomment}[1]{}
+
+% --------------------  START  --------------------
+\begin{document}
+
+% -------------------- HEADING --------------------
+\begin{flushright}
+  \setstretch{0.6}
+  \item {\Calluna (+62) 813-8513-6260}  % Phone number
+  \item {\Calluna eus.wedo@bps.go.id}  % E-mail address
+\end{flushright}\vspace{-45pt}
+
+\begin{flushleft}  % Rplace here with your name (and identity if required)
+  {\Calluna \fontsize{30pt}{30pt}\selectfont \textsc{Wihelmus Wedo}} \quad {\Calluna \fontsize{14.5pt}{14.5pt}\selectfont \textsc{S.Tr.Stat.}}
+  \noindent\rule{\textwidth}{0.4pt}
+\end{flushleft}
+
+% -------------------- EDUCATION --------------------
+\sectionBlock{
+\section{Pendidikan}
+}{
+  \eduHeading
+  {SD Inpres Lowolabo}{Nusa Tenggara Timur, Indonesia}
+  {}{2002 - 2004}
+
+  \eduHeading
+  {SD Katolik Maumere 5}{Nusa Tenggara Timur, Indonesia}
+  {}{2004 - 2008 \footnotesize{\textit{(lulus)}}}
+  
+  \eduHeading
+  {SMP Katolik Frateran Maumere}{Nusa Tenggara Timur, Indonesia}
+  {}{2008 - 2011 \footnotesize{\textit{(lulus)}}}
+
+\eduHeading
+  {SMA Katolik Frateran Maumere}{Nusa Tenggara Timur, Indonesia}
+  {}{2011 - 2014 \footnotesize{\textit{(lulus)}}}
+
+  \eduHeading
+  {Sekolah Tinggi Ilmu Statistik}{Jakarta, Indonesia}
+  {Jurusan D-IV Statistika}{2014-2018 \footnotesize{\textit{(lulus)}}}
+\itemListStart
+  \myItem{GPA: 2.74/4.00}
+\itemListEnd
+
+}
+
+% -------------------- PUBLICATIONS --------------------
+
+\mycomment{
+
+\sectionBlock{
+\section{Publications}
+}{
+\pubListStart
+\justifying
+\item \textbf{Xiao Yuan}, Hua Li. The Future Urban Transportation Systems: Innovations and Challenges. \textit{Journal of Operations Research and Optimization}, 2024.
+\item Hua Li, \textbf{Xiao Yuan}, John Doe. Optimizing Logistics and Supply Chain Networks Using Machine Learning Techniques. \textit{International Conference on Operations Research and Machine Learning}, 2023.
+\item John Doe, \textbf{Xiao Yuan}, Hua Li. Artificial Intelligence in Healthcare: Transforming Diagnostics and Treatment. \textit{International Conference on HealthTech Innovations}, 2023.
+\pubListEnd
+}
+
+}
+
+% -------------------- PEKERJAAN --------------------
+\sectionBlock{
+\section{Pekerjaan}
+}{
+
+\projHeading
+{\textbf{PNS, BPS Kabupaten Sumba Barat Data}}
+{Statistisi Pertama} {2019.01 - 2021.12}
+
+\projHeading
+{\textbf{PNS, BPS Kabupaten Sikka}}
+{Statistisi Pertama} {2022.01 - \textit{sekarang}}.
+}
+
+% -------------------- INTERNSHIPS : BLOCKED --------------------
+\mycomment{
+\sectionBlock{
+\section{Internships}
+}{
+\internHeading
+  {ABC Tech Ltd.}{Shanghai, China}{2024.01 - 2024.06}
+\itemListStart
+  \myItem{Develop engaging content for social media platforms.}
+  \myItem{Prepare reports and presentations summarizing research findings.}
+\itemListEnd
+\internHeading
+  {XYZ Tech Inc.}{Shanghai, China}{2023.07 - 2023.12}
+\itemListStart
+  \myItem{Develop engaging content for social media platforms.}
+  \myItem{Prepare reports and presentations summarizing research findings.}
+\itemListEnd
+}
+}
+% -------------------- AWARDS & HONORS --------------------
+\mycomment{
+
+
+\sectionBlock{
+\section{Awards\\and\\Honors}
+}{
+\awardListStart
+\justifying
+\item \emph{First Prize}, International Data Science Challenge \hfill 2023.11
+\item \emph{Best Innovation Award}, Tech Startup Pitch Competition \hfill 2023.05
+\item \emph{Excellence in Research Award}, Annual Research Symposium, \hfill 2022.12
+\item \emph{Academic Scholarship}, Tsinghua University \hfill 2022.09
+\awardListEnd
+}
+
+}
+% -------------------- SKILLS --------------------
+\sectionBlock{
+\section{Skills}
+}{
+\skillListStart
+\justifying
+\item \emph{Languages}: Bahasa Indonesia, English.
+\item \emph{Programming}: {\Courier \fontsize{11pt}{11pt}\selectfont R}.
+\skillListEnd
+}
+
+% -------------------- OTHERS : BLOCKED --------------------
+\mycomment{
+
+\sectionBlock{
+\section{Academic Services}
+}{
+\skillListStart
+\justifying
+\item \emph{Reviewers for}: \textit{Journal of Operations Research and Optimization},
+\item \phantom{\emph{Reviewers for}:} \textit{International Conference on Optimization and Machine Learning},
+\item \phantom{\emph{Reviewers for}:} \;...
+\skillListEnd
+}
+
+}
+\end{document}
+

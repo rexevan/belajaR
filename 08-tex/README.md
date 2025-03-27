@@ -1,3 +1,3 @@
 # README 
 
-Kalai ini saya belajar mengenai LaTeX.
+Kali ini saya belajar mengenai LaTeX.
